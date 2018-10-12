@@ -1,5 +1,7 @@
 package servlet;
 
+import utils.UserManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +17,25 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        //Le formulaire est invalide
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
-            request.setAttribute("error", "Tous les champs sont obligatoires");
+            request.setAttribute("errorMessage", "Tous les champs sont obligatoires");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
         }
+
+        //Les identifiants sont incorrects
+        boolean authorized = UserManager.IsUserAuthorized(username, password);
+        if(!authorized){
+            request.setAttribute("errorMessage", "Identifiants incorrects");
+            request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+        }
+
+        //Tous est correct
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("error", "Tous les champs sont obligatoires BASE");
         request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
     }
 }
