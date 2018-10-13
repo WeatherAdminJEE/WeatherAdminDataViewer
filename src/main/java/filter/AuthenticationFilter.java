@@ -9,6 +9,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/***
+ * Filtre déclanché avant chaque appel à un servlet.
+ * Permet de vérifier que l'utilisateur est bien connecté
+ * S'il ne l'ai pas : redirection vers page de connexion
+ */
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
     private ServletContext context;
@@ -32,16 +37,30 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
+        //Si l'utilisateur n'est pas connecté :
+        if(session == null){
+            //Il ne peut pas accéder à une autre servlet que "login"
+            if(!uri.contains("login")){
+                this.context.log("Unauthorized access");
+                res.sendRedirect("login");
+            }
+            else{
+                chain.doFilter(request, response);
+            }
+        }
+        //Si l'utilisateur est connecté :
+        else{
+            //Il ne peut pas accéder à la servlet "login"
+            if(uri.contains("login")){
+                res.sendRedirect("home");
+            }
+            //Il peut accéder à toutes les autres
+            else{
+                chain.doFilter(request, response);
+            }
+        }
 
-        if(session == null && !uri.contains("login")){
-            this.context.log("Unauthorized access");
-//            res.sendRedirect("/WeatherAdminDataViewer/jsp/login.jsp");
-            res.sendRedirect("login");
-        }
-        else {
-            //Continue to requested URI
-            chain.doFilter(request, response);
-        }
+
 
     }
 }

@@ -9,26 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "Home", urlPatterns = { "/home", "/accueil"})
+@WebServlet(name = "HomeServlet", urlPatterns = { "/home", "/accueil"})
 /**
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = "admin")
 )
 **/
-public class Home extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html>");
-        out.println("<head> <title>Accueil</title> </head> ");
-        out.println(" ");
-        out.println("<body>");
-
-
-        out.println("<h1>" + "ACCUEIL" + "</h1>");
-        out.println("</body>");
-        out.println("</html>");
-
+        request.getRequestDispatcher("jsp/home.jsp").forward(request, response);
     }
 }
