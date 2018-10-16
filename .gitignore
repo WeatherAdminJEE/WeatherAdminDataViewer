@@ -28,3 +28,7 @@ target/
 # Intellij #
 .idea/
 *.iml
+
+# Config files
+persistence.xml
+*.config
