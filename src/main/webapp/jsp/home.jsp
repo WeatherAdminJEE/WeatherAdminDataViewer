@@ -11,6 +11,10 @@
     <title>Page d'accueil</title>
 </head>
 <body>
-    <h1>Page d'accueil</h1>
+    <h1 style="color: salmon;">Page d'accueil</h1>
+    <a href = "/jsp/dataVisualisation/sensor/sensorsCore.jsp">Sensors</a>
+
+    <!--<h1 style="text-decoration: blink;">Cordialement</h1>-->
+    <h1 style="color: salmon;">Cordialement</h1>
 </body>
 </html>
