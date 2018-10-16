@@ -29,5 +29,6 @@ target/
 .idea/
 *.iml
 
-#Config
+# Config files
 persistence.xml
+*.config
