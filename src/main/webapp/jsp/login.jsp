@@ -23,6 +23,7 @@
     <input type="password" name="password">
     <p></p>
     <input type="submit" value="login">
+    <input type="hidden" name="requestedURI" value="${requestedURI}">
 </form>
 <c:if test="${not empty errorMessage}">
     <p>${errorMessage}</p>

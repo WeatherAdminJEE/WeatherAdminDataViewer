@@ -32,26 +32,28 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse res = (HttpServletResponse)response;
 
-        String uri = req.getRequestURI();
-        this.context.log("Requested ressource::"+uri);
+        //On sauvegarde l'uri demandée pour rediriger en cas de connexion nécessaire
+        String requestedURI = req.getRequestURI();
+        this.context.log("Requested ressource::"+requestedURI);
 
         HttpSession session = req.getSession(false);
 
         //Si l'utilisateur n'est pas connecté :
         if(session == null){
             //Il ne peut pas accéder à une autre servlet que "login"
-            if(!uri.contains("login")){
+            if(!requestedURI.contains("login")){
                 this.context.log("Unauthorized access");
-                res.sendRedirect("login");
+                res.sendRedirect("login?requesteduri=" + requestedURI);
             }
             else{
                 chain.doFilter(request, response);
             }
         }
+
         //Si l'utilisateur est connecté :
         else{
             //Il ne peut pas accéder à la servlet "login"
-            if(uri.contains("login")){
+            if(requestedURI.contains("login")){
                 res.sendRedirect("home");
             }
             //Il peut accéder à toutes les autres

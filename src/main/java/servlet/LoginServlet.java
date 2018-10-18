@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Page demandée avant d'être redirigé vers la page de connexion
+        String requestedURI = request.getParameter("requestedURI");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -35,12 +37,23 @@ public class LoginServlet extends HttpServlet {
         //Tous est correct
         //On créé la session
         request.getSession(true);
-        //redirection vers page d'accueil
-        response.sendRedirect("home");
+
+        //redirection vers la page demandée ou la page d'accueil
+        //On ne redirige pas vers logout juste apres un login...
+        if(requestedURI != null && !requestedURI.isEmpty() && !requestedURI.contains("logout"))
+            response.sendRedirect(requestedURI);
+        else
+            response.sendRedirect("home");
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Page demandée avant d'être redirigé vers la page de connexion
+        String requestedURI = request.getParameter("requesteduri");
+
+        if(requestedURI != null)
+            request.setAttribute("requestedURI", requestedURI);
+
         request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
     }
 }
