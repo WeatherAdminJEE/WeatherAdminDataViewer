@@ -18,7 +18,6 @@ import java.util.Collection;
 public class VisualiseAllSensorsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         Collection<SensorEntity> lst = SensorDao.getInstance().findAll();
         request.setAttribute("lstSensors",lst);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dataVisualisation/sensor/sensorsCore.jsp");
