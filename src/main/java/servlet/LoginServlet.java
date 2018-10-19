@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.UserDao;
 import utils.UserManager;
 
 import javax.servlet.ServletException;
@@ -20,15 +21,16 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         //Le formulaire est invalide
-        /*
+        
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             request.setAttribute("errorMessage", "Tous les champs sont obligatoires");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
         }
-        */
+
 
         //Les identifiants sont incorrects
-        boolean authorized = UserManager.IsUserAuthorized(username, password);
+//        boolean authorized = UserManager.IsUserAuthorized(username, password);
+        boolean authorized = UserDao.getInstance().isUserAuthorized(username, password);
         if(!authorized){
             request.setAttribute("errorMessage", "Identifiants incorrects");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
