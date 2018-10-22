@@ -1,8 +1,8 @@
-package servlet.mapVisualisation;
+package imt.org.web.weatheradmindataviewer.servlet.mapVisualisation;
 
-import dao.SensorDao;
-import imt.org.web.commonmodel.entities.SensorDataEntity;
+import imt.org.web.weatheradmindataviewer.dao.sensor.SensorDao;
 import imt.org.web.commonmodel.entities.SensorEntity;
+import imt.org.web.weatheradmindataviewer.crud.CRUDEntityFacade;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +18,8 @@ import java.util.List;
 @WebServlet(name = "mapServlet", urlPatterns = {"/map"})
 public class mapServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Collection<SensorEntity> lstSensor = SensorDao.getInstance().findAll();
+        SensorDao sensorDao = new SensorDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
+        Collection<SensorEntity> lstSensor = sensorDao.findAll();
         Collection<Float> lstSensorCoordinate = parseCoordinate(lstSensor);
         request.setAttribute("lstSensorCoordinate",lstSensorCoordinate);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dataVisualisation/map/map.jsp");

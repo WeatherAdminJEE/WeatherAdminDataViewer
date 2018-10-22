@@ -5,6 +5,8 @@ import imt.org.web.weatheradmindataviewer.crud.facade.IEntityFacade;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Generic CRUD facade implementation
@@ -75,11 +77,16 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      * @return Objects
      */
     @Override
-    public Collection<T> customFinder(String queryString) {
+    public Collection customFinder(String queryString, Map<String, T> queryParameters) {
 
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         Query query = manager.createQuery(queryString);
-        Collection<T> entities = query.getResultList();
+        if(queryParameters != null && !queryParameters.isEmpty()) {
+            for(Map.Entry<String, T> entry : queryParameters.entrySet()) {
+                query.setParameter(entry.getKey(), entry.getValue());
+            }
+        }
+        List entities = query.getResultList();
         manager.close();
         return entities;
     }

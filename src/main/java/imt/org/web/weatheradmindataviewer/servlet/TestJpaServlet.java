@@ -1,4 +1,4 @@
-package servlet;
+package imt.org.web.weatheradmindataviewer.servlet;
 
 import imt.org.web.commonmodel.entities.SensorEntity;
 

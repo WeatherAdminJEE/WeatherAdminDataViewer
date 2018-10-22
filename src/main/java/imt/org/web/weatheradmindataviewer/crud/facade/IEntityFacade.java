@@ -2,6 +2,7 @@ package imt.org.web.weatheradmindataviewer.crud.facade;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Generic CRUD facade interface
@@ -40,5 +41,5 @@ public interface IEntityFacade<T> {
      * @param queryString Query
      * @return Objects
      */
-    Collection<T> customFinder(String queryString);
+    Collection customFinder(String queryString, Map<String, T> queryParameters);
 }
