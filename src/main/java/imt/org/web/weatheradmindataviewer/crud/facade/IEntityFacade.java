@@ -1,0 +1,44 @@
+package imt.org.web.weatheradmindataviewer.crud.facade;
+
+import java.io.Serializable;
+import java.util.Collection;
+
+/**
+ * Generic CRUD facade interface
+ * @param <T> Entity type
+ */
+public interface IEntityFacade<T> {
+
+    /**
+     * Insert object
+     * @param entity Entity
+     */
+    void create(T entity);
+
+    /**
+     * Select object
+     * @param entity Entity class
+     * @param primaryKey PrK
+     * @return Requested object
+     */
+    T read(Class<T> entity, Serializable primaryKey);
+
+    /**
+     * Update object
+     * @param entity Entity
+     */
+    void update(T entity);
+
+    /**
+     * Delete object
+     * @param entity Entity
+     */
+    void delete(T entity);
+
+    /**
+     * Find objects with custom query
+     * @param queryString Query
+     * @return Objects
+     */
+    Collection<T> customFinder(String queryString);
+}
