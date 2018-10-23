@@ -21,6 +21,8 @@ public class GetAllSensorForMapAction extends HttpServlet {
         SensorDao sensorDao = new SensorDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
         Collection<SensorBean> lstSensorBean = SensorTransformers.entityToBean(sensorDao.findAll());
 
+        //TODO donner accès à la bdd dans les classes java non servlet
+
         String json = new Gson().toJson(lstSensorBean);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -31,4 +33,5 @@ public class GetAllSensorForMapAction extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+
 }

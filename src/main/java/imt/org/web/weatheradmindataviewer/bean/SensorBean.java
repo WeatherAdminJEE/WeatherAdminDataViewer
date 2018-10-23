@@ -13,7 +13,7 @@ public class SensorBean {
     private String name;
     private float latitude;
     private float longitude;
-    private SensorState state;
+    private SensorState status;
     // peut être les alertes
 
     String toJson(){

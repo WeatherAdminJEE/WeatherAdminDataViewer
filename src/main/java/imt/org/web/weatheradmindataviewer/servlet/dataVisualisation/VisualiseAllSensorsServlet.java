@@ -24,7 +24,7 @@ public class VisualiseAllSensorsServlet extends HttpServlet {
         SensorDao sensorDao = new SensorDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
         Collection<SensorBean> lst = SensorTransformers.entityToBean(sensorDao.findAll());
         request.setAttribute("lstSensors",lst);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dataVisualisation/sensor/sensorsCore.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dataVisualisation/sensor/viewAllSensors.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -24,7 +24,7 @@ public class SensorTransformers {
         bean.setName(entity.getNameSensor());
         bean.setLatitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[0]));
         bean.setLongitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[1]));
-        bean.setState(SensorUtils.computeSensorState(entity));
+        bean.setStatus(SensorUtils.computeSensorState(entity));
 
         return bean;
     }
