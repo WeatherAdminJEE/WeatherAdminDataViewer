@@ -5,6 +5,7 @@ import imt.org.web.weatheradmindataviewer.bean.SensorBean;
 import utils.SensorUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public class SensorTransformers {
     public static SensorBean entityToBean(SensorEntity entity){
         SensorBean bean = new SensorBean();
         bean.setId(entity.getIdSensor());
+        bean.setName(entity.getNameSensor());
         bean.setLattitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[0]));
         bean.setLongitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[1]));
         bean.setState(SensorUtils.computeSensorState(entity));
@@ -32,7 +34,7 @@ public class SensorTransformers {
      * @param listEntity la liste à convertir
      * @return la liste convertie
      */
-    public static List<SensorBean> entityToBean(List<SensorEntity> listEntity){
+    public static Collection<SensorBean> entityToBean(Collection<SensorEntity> listEntity){
         List<SensorBean> listBean = new ArrayList<>();
         for(SensorEntity entity: listEntity){
             listBean.add(entityToBean(entity));

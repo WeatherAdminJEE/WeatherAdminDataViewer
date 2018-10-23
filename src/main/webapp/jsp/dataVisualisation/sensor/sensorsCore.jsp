@@ -62,9 +62,9 @@
 <table>
     <c:forEach items="${lstSensors}" var="sensor">
         <tr>
-            <td>${sensor.idSensor}</td>
-            <td>${sensor.nameSensor}</td>
-            <td><a href="http://localhost:9090/WeatherAdminDataViewer/VisualiseAllDataFromOneSensor?idSensor=${sensor.idSensor}">Data</a></td>
+            <td>${sensor.id}</td>
+            <td>${sensor.name}</td>
+            <td><a href="http://localhost:9090/WeatherAdminDataViewer/VisualiseAllDataFromOneSensor?idSensor=${sensor.id}">Data</a></td>
         </tr>
     </c:forEach>
 </table>

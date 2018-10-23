@@ -1,8 +1,10 @@
 package imt.org.web.weatheradmindataviewer.servlet.dataVisualisation;
 
+import imt.org.web.weatheradmindataviewer.bean.SensorBean;
 import imt.org.web.weatheradmindataviewer.dao.sensor.SensorDao;
 import imt.org.web.commonmodel.entities.SensorEntity;
 import imt.org.web.weatheradmindataviewer.crud.CRUDEntityFacade;
+import imt.org.web.weatheradmindataviewer.transformers.SensorTransformers;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ public class VisualiseAllSensorsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         SensorDao sensorDao = new SensorDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
-        Collection<SensorEntity> lst = sensorDao.findAll();
+        Collection<SensorBean> lst = SensorTransformers.entityToBean(sensorDao.findAll());
         request.setAttribute("lstSensors",lst);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dataVisualisation/sensor/sensorsCore.jsp");
         dispatcher.forward(request, response);
