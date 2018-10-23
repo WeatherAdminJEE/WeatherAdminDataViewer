@@ -11,7 +11,7 @@ import utils.SensorUtils;
 public class SensorBean {
     private int id;
     private String name;
-    private float lattitude;
+    private float latitude;
     private float longitude;
     private SensorState state;
     // peut être les alertes
