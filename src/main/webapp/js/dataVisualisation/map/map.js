@@ -12,14 +12,25 @@ function initMap(){
 }
 
 
-function addPinToMap(arrayOfCoordinate){
-    console.log(arrayOfCoordinate);
-    for (var i =0; i <arrayOfCoordinate.length-1;i=i+2){
-        console.log(arrayOfCoordinate[i]);
-        console.log(arrayOfCoordinate[i+1]);
-        var marker = L.marker([arrayOfCoordinate[i], arrayOfCoordinate[i+1]]).addTo(mymap);
-        marker.bindPopup('<img src="./img/imt.JPG" alt="Italian Trulli">');
+$(document).on("click", "#myButton", function() {        // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+    $.get("./getAllSensorForMapAction", function(responseJson) {
+        console.log(responseJson);
+    });
+});
 
-    }
+function addPinToMap(arrayOfCoordinate){
+
+
+
+            /*
+                console.log(arrayOfCoordinate);
+                for (var i =0; i <arrayOfCoordinate.length-1;i=i+2){
+                    console.log(arrayOfCoordinate[i]);
+                    console.log(arrayOfCoordinate[i+1]);
+                    var marker = L.marker([arrayOfCoordinate[i], arrayOfCoordinate[i+1]]).addTo(mymap);
+                    marker.bindPopup('<img src="./img/imt.JPG" alt="Italian Trulli">');
+
+                }
+            */
 
 }

@@ -23,6 +23,8 @@
             integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
             crossorigin=""></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script src="./js/dataVisualisation/map/map.js"></script>
 
 </head>
@@ -35,6 +37,7 @@
             <td>${coord}</td>
         </tr>
     </c:forEach>
+    <button id="myButton">button</button>
     <script type="text/javascript">
         addPinToMap(<%= request.getAttribute("lstSensorCoordinate")%>);
     </script>

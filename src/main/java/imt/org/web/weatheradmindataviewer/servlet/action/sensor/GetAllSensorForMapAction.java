@@ -17,6 +17,7 @@ import java.util.Collection;
 @WebServlet(name = "GetAllSensorForMapAction", urlPatterns = {"/getAllSensorForMapAction"})
 public class GetAllSensorForMapAction extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("GetAllSensorForMapAction");
         SensorDao sensorDao = new SensorDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
         Collection<SensorBean> lstSensorBean = SensorTransformers.entityToBean(sensorDao.findAll());
 
