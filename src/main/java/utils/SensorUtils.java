@@ -7,8 +7,6 @@ import imt.org.web.weatheradmindataviewer.crud.CRUDEntityFacade;
 import imt.org.web.weatheradmindataviewer.crud.facade.IEntityFacade;
 import imt.org.web.weatheradmindataviewer.dao.sensordata.SensorDataDao;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Random;
 
 public class SensorUtils {

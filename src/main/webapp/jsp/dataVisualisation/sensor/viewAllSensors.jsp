@@ -45,6 +45,7 @@
                                 <tr>
                                     <th>Identifiant technique</th>
                                     <th>Name</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                     <th>Plus</th>
                                 </tr>
@@ -54,7 +55,7 @@
                                     <tr>
                                         <td>${sensor.id}</td>
                                         <td>${sensor.name}</td>
-
+                                        <td>${sensor.type}</td>
                                         <c:if test="${sensor.status=='ALERTE'}">
                                         <td style="background-color: salmon">
                                         </c:if>

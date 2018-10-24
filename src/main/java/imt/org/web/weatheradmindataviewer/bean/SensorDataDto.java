@@ -12,10 +12,9 @@ import lombok.Setter;
 public class SensorDataDto {
 
     private int id;
-    //@TODO private String sensorName
     private double value;
-    private String type;
     private String date;
+    private SensorBean sensor;
 
     String toJson(){
         return new Gson().toJson(this);

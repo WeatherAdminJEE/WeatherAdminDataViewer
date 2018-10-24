@@ -1,6 +1,7 @@
 package imt.org.web.weatheradmindataviewer.dao.sensordata;
 
 import imt.org.web.commonmodel.entities.SensorDataEntity;
+import imt.org.web.commonmodel.entities.SensorEntity;
 import imt.org.web.weatheradmindataviewer.crud.facade.IEntityFacade;
 
 import lombok.AllArgsConstructor;
@@ -22,10 +23,9 @@ public class SensorDataDao {
     public Collection findAllDataBySensor(int idSensor) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("select sensorData from SensorDataEntity sensorData, SensorEntity sensor");
+        stringBuilder.append("select sensorData from SensorDataEntity sensorData");
         stringBuilder.append(" where ");
-        stringBuilder.append("sensor.idSensor = :idSensor");
-        stringBuilder.append(" and sensorData.idSensor = sensor.idSensor");
+        stringBuilder.append("sensorData.sensor.idSensor = :idSensor");
 
         Map<String, Integer> queryParameters = new HashMap<>();
         queryParameters.put("idSensor", idSensor);

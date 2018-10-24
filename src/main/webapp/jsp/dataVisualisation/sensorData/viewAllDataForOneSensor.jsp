@@ -46,7 +46,7 @@
                                     <th>ID</th>
                                     <th>Date</th>
                                     <th>Valeur</th>
-                                    <th>Type</th>
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -55,7 +55,7 @@
                                         <td>${data.id}</td>
                                         <td>${data.date}</td>
                                         <td>${data.value}</td>
-                                        <td>${data.type}</td>
+
                                     </tr>
                                 </c:forEach>
                                 </tbody>

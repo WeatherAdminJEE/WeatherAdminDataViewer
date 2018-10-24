@@ -24,7 +24,8 @@ public class SensorTransformers {
         bean.setName(entity.getNameSensor());
         bean.setLatitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[0]));
         bean.setLongitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[1]));
-        bean.setStatus(SensorUtils.computeSensorState2(entity));
+        bean.setStatus(SensorUtils.computeSensorState(entity));
+        bean.setType(entity.getMeasureType().toString());
 
         return bean;
     }
@@ -35,6 +36,7 @@ public class SensorTransformers {
      * @return la liste convertie
      */
     public static Collection<SensorBean> entityToBean(Collection<SensorEntity> listEntity){
+
         List<SensorBean> listBean = new ArrayList<>();
         for(SensorEntity entity: listEntity){
             listBean.add(entityToBean(entity));

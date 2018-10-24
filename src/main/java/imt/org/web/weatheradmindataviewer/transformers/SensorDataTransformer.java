@@ -1,6 +1,7 @@
 package imt.org.web.weatheradmindataviewer.transformers;
 
 import imt.org.web.commonmodel.entities.SensorDataEntity;
+import imt.org.web.commonmodel.model.MeasureType;
 import imt.org.web.weatheradmindataviewer.bean.SensorDataDto;
 
 import java.util.ArrayList;
@@ -10,12 +11,10 @@ public class SensorDataTransformer {
 
     public static SensorDataDto entityToDto (SensorDataEntity entity){
         SensorDataDto dto = new SensorDataDto();
-
-
         dto.setId(entity.getIdSensorData());
         dto.setValue(entity.getMeasureValue());
-        dto.setType(entity.getIdMeasureType()+"");
         dto.setDate(entity.getDate().toString());
+
 
         return dto;
     }
