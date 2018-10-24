@@ -23,11 +23,27 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      */
     @Override
     public void create(final T entity) {
-
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        manager.persist(entity);
-        manager.flush();
-        manager.close();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            System.out.println("CRUD facade - create() - Begin transaction");
+
+            manager.merge(entity);
+            transaction.commit();
+            System.out.println("CRUD facade - create() - Transaction success");
+        } catch (PersistenceException hibernateEx) {
+            System.out.println("CRUD facade - create() - Insert error - " + hibernateEx.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+                System.out.println("CRUD facade - create() - Action rollback !\n" + hibernateEx.getMessage());
+            }
+        } finally {
+            manager.close();
+            System.out.println("CRUD facade - create() - EntityManager closed");
+        }
     }
 
     /**
@@ -38,11 +54,21 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      */
     @Override
     public T read(final Class<T> entity, final Serializable primaryKey) {
-
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        T entities = manager.find(entity, primaryKey);
-        manager.close();
-        return entities;
+        T entities = null;
+
+        try {
+            System.out.println("CRUD facade - read() - Begin read");
+            entities = manager.find(entity, primaryKey);
+            System.out.println("CRUD facade - read() - Read success");
+        } catch (PersistenceException hibernateEx) {
+            System.out.println("CRUD facade - read() - Read error - " + hibernateEx.getMessage());
+
+        } finally {
+            manager.close();
+            System.out.println("CRUD facade - read() - EntityManager closed");
+            return entities;
+        }
     }
 
     /**
@@ -51,11 +77,27 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      */
     @Override
     public void update(final T entity) {
-
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        manager.merge(entity);
-        manager.flush();
-        manager.close();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            System.out.println("CRUD facade - update() - Begin transaction");
+
+            manager.merge(entity);
+            transaction.commit();
+            System.out.println("CRUD facade - update() - Transaction success");
+        } catch (PersistenceException hibernateEx) {
+            System.out.println("CRUD facade - update() - Update error - " + hibernateEx.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+                System.out.println("CRUD facade - update() - Action rollback !\n" + hibernateEx.getMessage());
+            }
+        } finally {
+            manager.close();
+            System.out.println("CRUD facade - update() - EntityManager closed");
+        }
     }
 
     /**
@@ -64,11 +106,28 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      */
     @Override
     public void delete(final T entity) {
-
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        manager.remove(entity);
-        manager.flush();
-        manager.close();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            System.out.println("CRUD facade - delete() - Begin transaction");
+
+            manager.remove(entity);
+            transaction.commit();
+            System.out.println("CRUD facade - delete() - Transaction success");
+        } catch (PersistenceException hibernateEx) {
+            System.out.println("CRUD facade - delete() - Delete error - " + hibernateEx.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+                System.out.println("CRUD facade - delete() - Action rollback !\n" + hibernateEx.getMessage());
+            }
+        } finally {
+            manager.close();
+            System.out.println("CRUD facade - delete() - EntityManager closed");
+        }
+
     }
 
     /**
@@ -78,16 +137,25 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      */
     @Override
     public Collection customFinder(String queryString, Map<String, T> queryParameters) {
-
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        Query query = manager.createQuery(queryString);
-        if(queryParameters != null && !queryParameters.isEmpty()) {
-            for(Map.Entry<String, T> entry : queryParameters.entrySet()) {
-                query.setParameter(entry.getKey(), entry.getValue());
+        List entities = null;
+
+        try {
+            System.out.println("CRUD facade - customFinder() - Begin query");
+            Query query = manager.createQuery(queryString);
+            if(queryParameters != null && !queryParameters.isEmpty()) {
+                for(Map.Entry<String, T> entry : queryParameters.entrySet()) {
+                    query.setParameter(entry.getKey(), entry.getValue());
+                }
             }
+            entities = query.getResultList();
+            System.out.println("CRUD facade - customFinder() - Query success");
+        } catch (PersistenceException hibernateEx) {
+            System.out.println("CRUD facade - customFinder() - Query error - " + hibernateEx.getMessage());
+        } finally {
+            manager.close();
+            System.out.println("CRUD facade - customFinder() - EntityManager closed");
+            return entities;
         }
-        List entities = query.getResultList();
-        manager.close();
-        return entities;
     }
 }
