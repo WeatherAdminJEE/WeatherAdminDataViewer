@@ -31,7 +31,7 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
             transaction.begin();
             System.out.println("CRUD facade - create() - Begin transaction");
 
-            manager.merge(entity);
+            manager.persist(entity);
             transaction.commit();
             System.out.println("CRUD facade - create() - Transaction success");
         } catch (PersistenceException hibernateEx) {
@@ -85,7 +85,7 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
             transaction.begin();
             System.out.println("CRUD facade - update() - Begin transaction");
 
-            manager.merge(entity);
+            manager.persist(entity);
             transaction.commit();
             System.out.println("CRUD facade - update() - Transaction success");
         } catch (PersistenceException hibernateEx) {
