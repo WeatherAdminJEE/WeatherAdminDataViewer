@@ -56,7 +56,7 @@ public class UserDao extends AbstractDao {
 
         UserEntity user = getUserFromUsername(username);
 
-        if(user == null || user.getPassword() != encryptPassword)
+        if(user == null || !user.getPassword().equals(encryptPassword))
             return false;
         else
             return true;

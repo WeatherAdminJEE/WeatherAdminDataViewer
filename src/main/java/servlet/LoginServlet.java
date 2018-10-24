@@ -21,10 +21,10 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         //Le formulaire est invalide
-        
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             request.setAttribute("errorMessage", "Tous les champs sont obligatoires");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            return;
         }
 
 
@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
         if(!authorized){
             request.setAttribute("errorMessage", "Identifiants incorrects");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+            return;
         }
 
         //Tous est correct
@@ -42,10 +43,14 @@ public class LoginServlet extends HttpServlet {
 
         //redirection vers la page demandée ou la page d'accueil
         //On ne redirige pas vers logout juste apres un login...
-        if(requestedURI != null && !requestedURI.isEmpty() && !requestedURI.contains("logout"))
+        if(requestedURI != null && !requestedURI.isEmpty() && !requestedURI.contains("logout")) {
             response.sendRedirect(requestedURI);
-        else
+            return;
+        }
+        else {
             response.sendRedirect("home");
+            return;
+        }
     }
 
 
