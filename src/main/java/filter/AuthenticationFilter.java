@@ -38,12 +38,14 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-        //On laisse passer les requetes css, js
+        //On laisse passer les requetes css, js, img...
         if(requestedURI.indexOf("/css") > 0)
             chain.doFilter(request, response);
         else if(requestedURI.indexOf("/js") > 0)
             chain.doFilter(request, response);
         else if(requestedURI.indexOf("/fonts") > 0)
+            chain.doFilter(request, response);
+        else if (requestedURI.indexOf("/images") > 0)
             chain.doFilter(request, response);
         else {
 

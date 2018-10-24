@@ -20,11 +20,12 @@
                     <form method="post">
                         <h1>Connexion</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="username" required="" />
+                            <input type="text" class="form-control" placeholder="Username" name="username" required="" />
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" required="" />
+                            <input type="password" class="form-control" placeholder="Password" name="password" required="" />
                         </div>
+                        <input type="hidden" name="requestedURI" value="${requestedURI}">
                         <div>
                             <input class="btn btn-default submit" type="submit" value="login">
                             <a class="reset_pass" href="#">Mot de passe oublié?</a>
