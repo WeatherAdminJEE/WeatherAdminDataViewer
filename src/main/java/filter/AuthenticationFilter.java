@@ -38,31 +38,37 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-        //Si l'utilisateur n'est pas connecté :
-        if(session == null){
-            //Il ne peut pas accéder à une autre servlet que "login"
-            if(!requestedURI.contains("login")){
-                this.context.log("Unauthorized access");
-                res.sendRedirect("login?requesteduri=" + requestedURI);
+        //On laisse passer les requetes css, js
+        if(requestedURI.indexOf("/css") > 0)
+            chain.doFilter(request, response);
+        else if(requestedURI.indexOf("/js") > 0)
+            chain.doFilter(request, response);
+        else if(requestedURI.indexOf("/fonts") > 0)
+            chain.doFilter(request, response);
+        else {
+
+            //Si l'utilisateur n'est pas connecté :
+            if (session == null) {
+                //Il ne peut pas accéder à une autre servlet que "login"
+                if (!requestedURI.contains("login")) {
+                    this.context.log("Unauthorized access");
+                    res.sendRedirect("login?requesteduri=" + requestedURI);
+                } else {
+                    chain.doFilter(request, response);
+                }
             }
-            else{
-                chain.doFilter(request, response);
+
+            //Si l'utilisateur est connecté :
+            else {
+                //Il ne peut pas accéder à la servlet "login"
+                if (requestedURI.contains("login")) {
+                    res.sendRedirect("home");
+                }
+                //Il peut accéder à toutes les autres
+                else {
+                    chain.doFilter(request, response);
+                }
             }
         }
-
-        //Si l'utilisateur est connecté :
-        else{
-            //Il ne peut pas accéder à la servlet "login"
-            if(requestedURI.contains("login")){
-                res.sendRedirect("home");
-            }
-            //Il peut accéder à toutes les autres
-            else{
-                chain.doFilter(request, response);
-            }
-        }
-
-
-
     }
 }
