@@ -4,6 +4,8 @@
     <head>
         <title>WeatherAdminDataViewer</title>
         <%@ include file="/WEB-INF/jspf/templateHeader.jspf" %>
+        <!-- OpenStreetMap -->
+        <link href="vendors/openlayers/ol.css" rel="stylesheet">
     </head>
 
     <body class="nav-md">
@@ -26,6 +28,7 @@
                             </div>
                             <div class="x_content">
                                 <div id="sensorMap" style="height:532px"></div>
+                                <div id="sensorPopup"></div>
                             </div>
                         </div>
                     </div>
@@ -40,8 +43,12 @@
     </div>
     <%@ include file="/WEB-INF/jspf/includeTemplateScripts.jspf" %>
     <!-- OpenStreetMap -->
-    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="vendors/openlayers/ol.js"></script>
     <!-- Index script -->
     <script src="js/index/index.js"></script>
+    <script>
+        initMap();
+        loadSensors();
+    </script>
     </body>
 </html>

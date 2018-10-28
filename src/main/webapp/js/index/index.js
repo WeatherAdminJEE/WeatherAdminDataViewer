@@ -1,49 +1,101 @@
-
+/**
+ * Global var
+ */
 var sensorMap;
-var markers;
-
-initSensorMap();
-loadSensors();
+var markers = new ol.source.Vector();
+var markerStyle = new ol.style.Style({
+    image: new ol.style.Icon(({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: 'img/marker.png'
+    }))
+});
 
 /**
  * Init sensors locations map (OpenStreetMap based)
  */
-function initSensorMap() {
-
-    sensorMap = new OpenLayers.Map("sensorMap");
-    sensorMap.addLayer(new OpenLayers.Layer.OSM());
-    sensorMap.zoomToMaxExtent();
-    sensorMap.setCenter(new OpenLayers.LonLat(-1.553621,47.218371) // Centre de la carte
-        .transform(
-            new OpenLayers.Projection("EPSG:4326"), // Transformation de WGS 1984
-            new OpenLayers.Projection("EPSG:900913") // Projection Mercator sphérique
-        ), 12 // Zoom level
-    );
-    markers = new OpenLayers.Layer.Markers("Markers");
-    sensorMap.addLayer(markers);
+function initMap() {
+    sensorMap = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            }),
+            new ol.layer.Vector({
+                source: markers,
+                style: markerStyle
+            })
+        ],
+        target: 'sensorMap',
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-1.553621, 47.218371]),
+            zoom: 12
+        })
+    });
+    initSensorPopups();
 }
 
 /**
- * Add sensors markers on the map
- * @param mapMarkersCoordinates Sensors GPS coordinates
+ * Init sensor popups on click
  */
-function initMapSensorMarkers(sensors) {
+function initSensorPopups() {
+    // Add map overlay
+    var popupElem = document.getElementById('sensorPopup');
+    var popup = new ol.Overlay({
+        element: popupElem,
+        positioning: 'bottom-center',
+        stopEvent: false,
+        offset: [0, -50]
+    });
+    sensorMap.addOverlay(popup);
 
-    for (var i=0; i < sensors.length; i=i+1) {
-        var longLat = new OpenLayers.LonLat(sensors[i].longitude, sensors[i].latitude)
-            .transform(
-                new OpenLayers.Projection("EPSG:4326"),
-                sensorMap.getProjectionObject()
-            );
-        markers.addMarker(new OpenLayers.Marker(longLat));
-    }
+    // Display popup on click
+    sensorMap.on('click', function(evt) {
+        var feature = sensorMap.forEachFeatureAtPixel(evt.pixel,
+            function(feature) {
+                return feature;
+            });
+        if (feature) {
+            var coordinates = feature.getGeometry().getCoordinates();
+            popup.setPosition(coordinates);
+            $(popupElem).popover({
+                placement: 'top',
+                html: true,
+                content: feature.get('idSensor') + feature.get('nameSensor')
+            });
+            $(popupElem).popover('show');
+        } else {
+            $(popupElem).popover('destroy');
+        }
+    });
 }
 
 /**
  * Load sensors from servlet
  */
 function loadSensors() {
-    $.get("./getAllSensorForMapAction", function(sensorsResponse) {
-        initMapSensorMarkers(sensorsResponse);
+    // GET request
+    $.get("./getAllSensorForMapAction", function(sensors) {
+        initSensorMarkers(sensors);
     });
+}
+
+/**
+ * Add sensor markers on the map
+ * @param sensors Sensors data
+ */
+function initSensorMarkers(sensors) {
+    // Init marker for each sensor
+    for (var i=0; i < sensors.length; i=i+1) {
+        var marker = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.transform([sensors[i].longitude, sensors[i].latitude],
+                'EPSG:4326',
+                'EPSG:3857')),
+            idSensor: sensors[i].id,
+            nameSensor: sensors[i].name,
+            typeSensor: sensors[i].type,
+            statusSensor: sensors[i].status
+        });
+        markers.addFeature(marker);
+    }
 }
