@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         if(requestedURI != null && !requestedURI.isEmpty() && !requestedURI.contains("logout"))
             response.sendRedirect(requestedURI);
         else
-            response.sendRedirect("home");
+            response.sendRedirect("index");
     }
 
 

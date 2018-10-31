@@ -54,7 +54,10 @@ public class AuthenticationFilter implements Filter {
                 //Il ne peut pas accéder à une autre servlet que "login"
                 if (!requestedURI.contains("login")) {
                     this.context.log("Unauthorized access");
-                    res.sendRedirect("login?requesteduri=" + requestedURI);
+                    if(requestedURI.equals("/WeatherAdminDataViewer/"))
+                        res.sendRedirect("login");
+                    else
+                        res.sendRedirect("login?requesteduri=" + requestedURI);
                 } else {
                     chain.doFilter(request, response);
                 }
@@ -64,7 +67,7 @@ public class AuthenticationFilter implements Filter {
             else {
                 //Il ne peut pas accéder à la servlet "login"
                 if (requestedURI.contains("login")) {
-                    res.sendRedirect("home");
+                    res.sendRedirect("index");
                 }
                 //Il peut accéder à toutes les autres
                 else {
