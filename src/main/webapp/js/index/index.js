@@ -61,7 +61,19 @@ function initSensorPopups() {
             $(popupElem).popover({
                 placement: 'top',
                 html: true,
-                content: feature.get('idSensor') + feature.get('nameSensor')
+                content: "<div style=\"height:150px\">" +
+                            "<div class=\"x_title\">" +
+                                "<h2>Nom du capteur : " +  feature.get('nameSensor') +"</h2>" +
+                                "<div class=\"clearfix\"></div>" +
+                            "</div>" +
+                            "<div class=\"x_content\">" +
+                                "<h4>ID Capteur : " + feature.get('idSensor') + "</h4>" +
+                                "<h4>Type du capteur : " + feature.get('typeSensor') + "</h4>" +
+                                "<h4>Statut : " + feature.get('statusSensor') + "</h4>" +
+                                "<input type =\"button\" onclick=\"location.href='./VisualiseAllDataFromOneSensor?idSensor=" +
+                                                                feature.get('idSensor') + "';\" value=\"Voir les mesures\" />" +
+                            "</div>" +
+                        "</div>"
             });
             $(popupElem).popover('show');
         } else {

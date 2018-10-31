@@ -13,30 +13,8 @@
                 <div class="menu_section">
                     <ul class="nav side-menu">
                         <li><a href="index"><i class="fa fa-home"></i> Accueil </a></li>
-                        <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="form.html">General Form</a></li>
-                                <li><a href="form_buttons.html">Form Buttons</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="general_elements.html">General Elements</a></li>
-                                <li><a href="icons.html">Icons</a></li>
-                                <li><a href="glyphicons.html">Glyphicons</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="chartjs.html">Chart JS</a></li>
-                                <li><a href="morisjs.html">Moris JS</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="sensors"><i class="fa fa-desktop"></i> Capteurs </a></li>
+                        <li><a href=""><i class="fa fa-bar-chart-o"></i> Historique </a></li>
                     </ul>
                 </div>
             </div>
