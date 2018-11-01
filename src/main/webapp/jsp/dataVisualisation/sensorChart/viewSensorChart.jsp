@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="fr">
     <head>
         <title>Historique des mesures</title>
@@ -30,9 +35,12 @@
                             <div class="x_content">
                                 <div class="row">
                                     <!-- TODO: Alimenter le selecteur Select2 avec les capteurs -->
-                                    <select class="select2_single form-control" tabindex="-1">
-                                        <option value="1">Sensor1</option>
-                                        <option value="2">Sensor2</option>
+                                    <select class="select2_single form-control" tabindex="-1" name="sensorChoice" onchange="sensorSelectionChanged(this.value);">
+                                        <c:forEach items="${sensors}" var="sensor">
+                                            <option value="${sensor.id}">
+                                                    ${sensor.name}
+                                            </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -89,5 +97,7 @@
     <!-- bootstrap-daterangepicker -->
     <script src="vendors/moment/js/moment.min.js"></script>
     <script src="vendors/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+    s
+    <script src="js/sensorChart/customchart.js"></script>
     </body>
 </html>
