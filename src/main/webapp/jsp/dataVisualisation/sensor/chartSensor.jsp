@@ -33,7 +33,7 @@
                             <select name="sensorChoice" onchange="sensorSelectionChanged(this.value);">
                                 <c:forEach items="${sensors}" var="sensor">
                                     <option value="${sensor.id}">
-                                        ${sensor.name}
+                                        ${sensor.name} 
                                     </option>
                                 </c:forEach>
                             </select>
@@ -48,8 +48,8 @@
         <%@ include file="/WEB-INF/jspf/templateFooter.jspf" %>
     </div>
 </div>
+<script src="build/js/customchart.js" />
 <%@ include file="/WEB-INF/jspf/includeTemplateScripts.jspf" %>
-<script src="build/js/customchart.min.js"></script>
 
 
 </body>
