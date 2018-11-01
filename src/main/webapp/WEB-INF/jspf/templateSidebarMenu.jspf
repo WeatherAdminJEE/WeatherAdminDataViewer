@@ -1,20 +1,24 @@
-<div class="col-md-3 left_col">
-    <div class="left_col scroll-view">
-        <div class="navbar nav_title" style="border: 0;">
-            <a href="index" class="site_title"><i class="fa fa-cloud"></i> <span>La météo!</span></a>
-        </div>
-        <div class="clearfix"></div>
-
-        <!-- sidebar menu -->
-        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-                <ul class="nav side-menu">
-                    <li><a href="index"><i class="fa fa-home"></i> Accueil </a></li>
-                    <li><a href="sensors"><i class="fa fa-desktop"></i> Capteurs </a></li>
-                    <li><a href="historique"><i class="fa fa-bar-chart-o"></i> Historique </a></li>
-                </ul>
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+    <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+                <a href="index" class="site_title"><i class="fa fa-cloud"></i> <span>La météo!</span></a>
             </div>
+            <div class="clearfix"></div>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                    <ul class="nav side-menu">
+                        <li><a href="index"><i class="fa fa-home"></i> Accueil </a></li>
+                        <li><a href="sensors"><i class="fa fa-desktop"></i> Capteurs </a></li>
+                        <li><a href="historique"><i class="fa fa-bar-chart-o"></i> Historique </a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /sidebar menu -->
         </div>
-        <!-- /sidebar menu -->
     </div>
-</div>
+</html>
