@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <!-- footer content -->
-    <footer>
-        <div class="pull-right">WeatherAdminDataViewer</div>
-        <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
-</html>
+<footer>
+    <div class="pull-right">WeatherAdminDataViewer</div>
+    <div class="clearfix"></div>
+</footer>
