@@ -70,7 +70,7 @@ function initSensorPopups() {
                                 "<h4>ID Capteur : " + feature.get('idSensor') + "</h4>" +
                                 "<h4>Type du capteur : " + feature.get('typeSensor') + "</h4>" +
                                 "<h4>Statut : " + feature.get('statusSensor') + "</h4>" +
-                                "<input type =\"button\" onclick=\"location.href='./VisualiseAllDataFromOneSensor?idSensor=" +
+                                "<input type =\"button\" class=\"btn btn-info\" onclick=\"location.href='./VisualiseAllDataFromOneSensor?idSensor=" +
                                                                 feature.get('idSensor') + "';\" value=\"Voir les mesures\" />" +
                             "</div>" +
                         "</div>"

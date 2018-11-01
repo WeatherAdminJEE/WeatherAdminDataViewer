@@ -4,8 +4,6 @@ import imt.org.web.weatheradmindataviewer.bean.SensorBean;
 import imt.org.web.weatheradmindataviewer.bean.SensorDataDto;
 import imt.org.web.weatheradmindataviewer.dao.sensor.SensorDao;
 import imt.org.web.weatheradmindataviewer.dao.sensordata.SensorDataDao;
-import imt.org.web.commonmodel.entities.SensorDataEntity;
-import imt.org.web.commonmodel.entities.SensorEntity;
 import imt.org.web.weatheradmindataviewer.crud.CRUDEntityFacade;
 import imt.org.web.weatheradmindataviewer.transformers.SensorDataTransformer;
 import imt.org.web.weatheradmindataviewer.transformers.SensorTransformers;

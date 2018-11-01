@@ -1,13 +1,11 @@
-package filter;
+package imt.org.web.weatheradmindataviewer.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Enumeration;
 
 /***
  * Filtre déclanché avant chaque appel à un servlet.

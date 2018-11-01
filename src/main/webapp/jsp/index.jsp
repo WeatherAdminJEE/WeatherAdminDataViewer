@@ -20,14 +20,14 @@
                 <div class="row">
                     <!-- map container -->
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel" style="height:620px">
+                        <div class="x_panel">
                             <div class="x_title">
                                 <h2>Localisation des capteurs
                                 </h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <div id="sensorMap" style="height:532px"></div>
+                                <div id="sensorMap" style="height:650px"></div>
                                 <div id="sensorPopup"></div>
                             </div>
                         </div>

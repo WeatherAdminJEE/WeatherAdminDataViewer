@@ -1,6 +1,6 @@
 package imt.org.web.weatheradmindataviewer.servlet;
 
-import utils.UserManager;
+import imt.org.web.weatheradmindataviewer.utils.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

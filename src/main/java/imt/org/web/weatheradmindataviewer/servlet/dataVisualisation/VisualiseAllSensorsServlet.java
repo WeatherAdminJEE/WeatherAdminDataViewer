@@ -2,7 +2,6 @@ package imt.org.web.weatheradmindataviewer.servlet.dataVisualisation;
 
 import imt.org.web.weatheradmindataviewer.bean.SensorBean;
 import imt.org.web.weatheradmindataviewer.dao.sensor.SensorDao;
-import imt.org.web.commonmodel.entities.SensorEntity;
 import imt.org.web.weatheradmindataviewer.crud.CRUDEntityFacade;
 import imt.org.web.weatheradmindataviewer.transformers.SensorTransformers;
 

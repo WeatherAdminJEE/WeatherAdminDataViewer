@@ -2,7 +2,7 @@ package imt.org.web.weatheradmindataviewer.transformers;
 
 import imt.org.web.commonmodel.entities.SensorEntity;
 import imt.org.web.weatheradmindataviewer.bean.SensorBean;
-import utils.SensorUtils;
+import imt.org.web.weatheradmindataviewer.utils.SensorUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;

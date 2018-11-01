@@ -7,7 +7,7 @@
 
   <filter>
     <filter-name>AuthenticationFilter</filter-name> <!-- mandatory -->
-    <filter-class>filter.AuthenticationFilter</filter-class> <!-- mandatory -->
+    <filter-class>imt.org.web.weatheradmindataviewer.filter.AuthenticationFilter</filter-class> <!-- mandatory -->
   </filter>
 
   <filter-mapping>

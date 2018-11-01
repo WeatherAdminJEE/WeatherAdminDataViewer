@@ -1,10 +1,8 @@
 package imt.org.web.weatheradmindataviewer.bean;
 
 import com.google.gson.Gson;
-import imt.org.web.commonmodel.entities.SensorEntity;
 import lombok.Getter;
 import lombok.Setter;
-import utils.SensorUtils;
 
 @Getter
 @Setter

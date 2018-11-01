@@ -1,4 +1,4 @@
-package utils;
+package imt.org.web.weatheradmindataviewer.utils;
 
 import imt.org.web.commonmodel.entities.SensorDataEntity;
 import imt.org.web.commonmodel.entities.SensorEntity;
@@ -51,4 +51,3 @@ public class SensorUtils {
 
     }
 }
-
