@@ -34,7 +34,7 @@ public class VisualiseAllDataFromOneSensorServlet extends HttpServlet {
         SensorBean sensor = SensorTransformers.entityToBean(sensorDao.findById(idSensor));
         if(sensor != null) {
             Collection<SensorDataDto> lstSensorData = SensorDataTransformer.entityToDto(sensorDataDao.findAllDataBySensor(idSensor));
-            request.setAttribute("sensor",sensor);
+            request.setAttribute("sensor", sensor);
             request.setAttribute("lstSensorData", lstSensorData);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dataVisualisation/sensorData/viewAllDataForOneSensor.jsp");
             dispatcher.forward(request, response);
