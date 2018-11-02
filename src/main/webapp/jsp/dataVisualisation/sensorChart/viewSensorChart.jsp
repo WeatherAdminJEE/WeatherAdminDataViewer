@@ -26,7 +26,7 @@
                 <!-- cmd row -->
                 <div class="row">
                     <!-- sensors list container -->
-                    <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Liste des capteurs</h2>
@@ -49,7 +49,7 @@
                     <!-- /sensors list container -->
 
                     <!-- datepicker container -->
-                    <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Période des mesures</h2>
@@ -63,9 +63,26 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /datepicker container -->
+                    <!-- datepicker container -->
+                    <!--
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Détails du capteur</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <p>Nom : <i id="sensorName"></i></p>
+                                <p>Type : <i id="sensorType"></i></p>
+                                <p>Statut : <i id="sensorStatut"></i></p>
+                                <button type="button" class="btn btn-dark">valider</button>
+                            </div>
+                        </div>
+                    </div>
+                    -->
                 </div>
                 <!-- /cmd row -->
+
 
                 <!-- chart row -->
                 <div class="row">
