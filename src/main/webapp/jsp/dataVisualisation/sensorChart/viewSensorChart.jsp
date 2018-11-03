@@ -35,7 +35,7 @@
                             <div class="x_content">
                                 <div class="row">
                                     <!-- TODO: Alimenter le selecteur Select2 avec les capteurs -->
-                                    <select class="select2_single form-control" tabindex="-1" name="sensorChoice" onchange="sensorSelectionChanged(this.value);">
+                                    <select class="select2_single form-control" tabindex="-1" id="sensorChoice" onchange="sensorSelectionChanged(this.value);">
                                         <c:forEach items="${sensors}" var="sensor">
                                             <option value="${sensor.id}">
                                                     ${sensor.name}
@@ -70,7 +70,6 @@
                         </div>
                     </div>
                     <!-- datepicker container -->
-                    <!--
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
@@ -81,11 +80,9 @@
                                 <p>Nom : <i id="sensorName"></i></p>
                                 <p>Type : <i id="sensorType"></i></p>
                                 <p>Statut : <i id="sensorStatut"></i></p>
-                                <button type="button" class="btn btn-dark">valider</button>
                             </div>
                         </div>
                     </div>
-                    -->
                 </div>
                 <!-- /cmd row -->
 
@@ -100,7 +97,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <canvas id="myChart"></canvas>
+                                <canvas id="histo-chart"></canvas>
                             </div>
                         </div>
                     </div>
