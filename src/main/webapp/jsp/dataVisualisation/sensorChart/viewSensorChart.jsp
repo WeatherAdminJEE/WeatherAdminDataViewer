@@ -56,9 +56,15 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
+                                <!--
                                 <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                                     <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                                     <span></span> <b class="caret"></b>
+                                </div>
+                                -->
+                                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <i class="fa fa-calendar"></i>&nbsp;
+                                    <span></span> <i class="fa fa-caret-down"></i>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +100,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <!-- TODO: Rajouter ici la div du graphique -->
+                                <canvas id="myChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -108,13 +114,14 @@
             <%@ include file="/WEB-INF/jspf/templateFooter.jspf" %>
         </div>
     </div>
+
     <%@ include file="/WEB-INF/jspf/includeTemplateScripts.jspf" %>
-    <!-- Select2 -->
+
     <script src="vendors/select2/dist/js/select2.full.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="vendors/moment/js/moment.min.js"></script>
-    <script src="vendors/bootstrap-daterangepicker/js/daterangepicker.js"></script>
-    s
+    <script src="js/sensorChart/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="js/sensorChart/daterangepicker.js"></script>
+
     <script src="js/sensorChart/customchart.js"></script>
     </body>
 </html>
