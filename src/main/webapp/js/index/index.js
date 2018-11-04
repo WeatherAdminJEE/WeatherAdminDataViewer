@@ -28,8 +28,8 @@ function initMap() {
         ],
         target: 'sensorMap',
         view: new ol.View({
-            center: ol.proj.fromLonLat([-1.553621, 47.218371]),
-            zoom: 12
+            center: ol.proj.fromLonLat([-1.518183782428, 47.28282929920]),
+            zoom: 15.9
         })
     });
     initSensorPopups();
@@ -87,9 +87,7 @@ function initSensorPopups() {
  */
 function loadSensors() {
     // GET request
-    $.get("./getAllSensorForMapAction", function(sensors) {
-        initSensorMarkers(sensors);
-    });
+    $.get("./getAllSensorForMapAction").then(function (sensors) { initSensorMarkers(sensors); });
 }
 
 /**
