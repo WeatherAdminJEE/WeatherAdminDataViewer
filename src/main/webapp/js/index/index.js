@@ -58,23 +58,22 @@ function initSensorPopups() {
         if (feature) {
             var coordinates = feature.getGeometry().getCoordinates();
             popup.setPosition(coordinates);
-            $(popupElem).popover({
-                placement: 'top',
-                html: true,
-                content: "<div style=\"height:150px\">" +
-                            "<div class=\"x_title\">" +
-                                "<h2>Nom du capteur : " +  feature.get('nameSensor') +"</h2>" +
-                                "<div class=\"clearfix\"></div>" +
-                            "</div>" +
-                            "<div class=\"x_content\">" +
-                                "<h4>ID Capteur : " + feature.get('idSensor') + "</h4>" +
-                                "<h4>Type du capteur : " + feature.get('typeSensor') + "</h4>" +
-                                "<h4>Statut : " + feature.get('statusSensor') + "</h4>" +
-                                "<input type =\"button\" class=\"btn btn-info\" onclick=\"location.href='./VisualiseAllDataFromOneSensor?idSensor=" +
-                                                                feature.get('idSensor') + "';\" value=\"Voir les mesures\" />" +
-                            "</div>" +
-                        "</div>"
-            });
+            $(popupElem).attr('data-placement', 'top');
+            $(popupElem).attr('data-content', "<div style=\"height:150px\">" +
+                "<div class=\"x_title\">" +
+                    "<h2>Nom du capteur : " +  feature.get('nameSensor') +"</h2>" +
+                    "<div class=\"clearfix\"></div>" +
+                    "</div>" +
+                        "<div class=\"x_content\">" +
+                            "<h4>ID Capteur : " + feature.get('idSensor') + "</h4>" +
+                            "<h4>Type du capteur : " + feature.get('typeSensor') + "</h4>" +
+                            "<h4>Statut : " + feature.get('statusSensor') + "</h4>" +
+                            "<input type =\"button\" class=\"btn btn-info\" onclick=\"location.href='./VisualiseAllDataFromOneSensor?idSensor=" +
+                            feature.get('idSensor') + "';\" value=\"Voir les mesures\" />" +
+                        "</div>" +
+                    "</div>" +
+                "</div>");
+            $(popupElem).attr('data-html', true);
             $(popupElem).popover('show');
         } else {
             $(popupElem).popover('destroy');
