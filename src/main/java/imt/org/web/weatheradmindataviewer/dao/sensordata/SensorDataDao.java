@@ -46,7 +46,7 @@ public class SensorDataDao {
 
     }
 
-    public Collection findDataBySensorDateRange(int idSensor, Timestamp beginDate){
+    public Collection findDataBySensorDateRange(int idSensor, Timestamp beginDate, Timestamp endDate){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("select sensorData from SensorDataEntity sensorData");
         stringBuilder.append(" where ");
@@ -57,6 +57,12 @@ public class SensorDataDao {
         Map<String, Object> queryParameters = new HashMap<>();
         queryParameters.put("idSensor", idSensor);
         queryParameters.put("beginDate", beginDate);
+
+        if(endDate != null){
+            stringBuilder.append(" and ");
+            stringBuilder.append("sensorData.date <= :endDate");
+            queryParameters.put("endDate", endDate);
+        }
 
         return crudEntityFacade.customFinder(stringBuilder.toString(), queryParameters);
     }

@@ -39,8 +39,33 @@ function sensorSelectionChanged(value) {
 function dateTimeRangeChanged(start, end){
     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     console.log("La sélection de la période a changée :")
-    console.log("start : " + start.format('DD/MM/YYYY hh:mm:ss'));
-    console.log("end : " + end.format('DD/MM/YYYY hh:mm:ss'));
+    console.log("start : " + start.format('DD/MM/YYYY HH:mm:ss'));
+    console.log("end : " + end.format('DD/MM/YYYY HH:mm:ss'));
+
+    var dateFormat = 'DD/MM/YYYY HH:mm:ss';
+    //On update le graph
+    //Sensor selected
+    var selectedSensor = $('#sensorChoice option:selected').val();
+    console.log("selectedSensor : " + selectedSensor);
+
+    var sensorType = $("#sensorType").text();
+    console.log("sensortype : " + sensorType);
+    /*
+    Affiche le graph
+     */
+    var datasetArray = [];
+    var dateArray = [];
+    var valueArray = [];
+    $.getJSON("./getSensorDataById?sensorId=" + selectedSensor + "&beginDate=" + start.format(dateFormat) + "&endDate=" + end.format(dateFormat), function (records) {
+        $.each(records, function (key, val) {
+            datasetArray.push({t: moment(val["date"]), y: val["value"]});
+            dateArray.push(moment(val["date"]).format("DD/MM/YYYY HH:mm:ss"));
+            valueArray.push(val["value"]);
+        });
+
+        printGraph(dateArray, valueArray, sensorType);
+    });
+
 }
 
 /**
@@ -99,7 +124,7 @@ $(function() {
         }
     }, dateTimeRangeChanged);
 
-    dateTimeRangeChanged(start, end);
+    //dateTimeRangeChanged(start, end);
 
     //Pour forcer la premiere creation du graph
     var sensorSelected = $("#sensorChoice option:selected").val();
