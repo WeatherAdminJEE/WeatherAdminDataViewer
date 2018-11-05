@@ -12,7 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 
 @WebServlet(name = "GetSensorDataByIdServlet", urlPatterns = "/getSensorDataById")
 public class GetSensorDataByIdServlet extends HttpServlet {
@@ -21,10 +27,15 @@ public class GetSensorDataByIdServlet extends HttpServlet {
         try {
             String idStr = request.getParameter("sensorId");
             sensorId = Integer.parseInt(idStr);
+            
 
-            //Récupère la liste de données du sensor
+            //Prend par défaut les deux dernieres heures
+            LocalDateTime dateTime = LocalDateTime.now().minusHours(2);
+            Timestamp beginDate = Timestamp.valueOf(dateTime);
+
+            //Récupère la liste de données du sensor selon le date range voulu
             SensorDataDao sensorDataDao = new SensorDataDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
-            Collection<SensorDataDto> lstSensorData = SensorDataTransformer.entityToDto(sensorDataDao.findAllDataBySensor(sensorId));
+            Collection<SensorDataDto> lstSensorData = SensorDataTransformer.entityToDto(sensorDataDao.findDataBySensorDateRange(sensorId, beginDate));
 
             String jsonResult = new Gson().toJson(lstSensorData);
             response.setContentType("application/json");

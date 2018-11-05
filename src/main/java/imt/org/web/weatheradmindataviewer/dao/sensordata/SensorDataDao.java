@@ -6,6 +6,7 @@ import imt.org.web.weatheradmindataviewer.crud.facade.IEntityFacade;
 
 import lombok.AllArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,5 +44,20 @@ public class SensorDataDao {
         queryParameters.put("idSensor", idSensor);
         return (SensorDataEntity)crudEntityFacade.customFinder(sb.toString(), queryParameters).iterator().next();
 
+    }
+
+    public Collection findDataBySensorDateRange(int idSensor, Timestamp beginDate){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("select sensorData from SensorDataEntity sensorData");
+        stringBuilder.append(" where ");
+        stringBuilder.append("sensorData.sensor.idSensor = :idSensor");
+        stringBuilder.append(" and ");
+        stringBuilder.append("sensorData.date >= :beginDate");
+
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("idSensor", idSensor);
+        queryParameters.put("beginDate", beginDate);
+
+        return crudEntityFacade.customFinder(stringBuilder.toString(), queryParameters);
     }
 }

@@ -18,16 +18,19 @@ public class SensorChartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Dans le cas ou on veut afficher directement un sensor en particulier
-        String idStr = request.getParameter("sensorId");
+        try {
+            //Dans le cas ou on veut afficher directement un sensor en particulier
+            String idStr = request.getParameter("sensorId");
 
-        SensorDao sensorDao = new SensorDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
-        Collection<SensorBean> lst = SensorTransformers.entityToBean(sensorDao.findAll());
-        request.setAttribute("sensors", lst);
+            SensorDao sensorDao = new SensorDao((CRUDEntityFacade) getServletContext().getAttribute("CRUDEntityFacade"));
+            Collection<SensorBean> lst = SensorTransformers.entityToBean(sensorDao.findAll());
+            request.setAttribute("sensors", lst);
 
-        if(idStr != null && !idStr.isEmpty()){
-            request.setAttribute("sensorSelected", idStr);
+            if (idStr != null && !idStr.isEmpty()) {
+                request.setAttribute("sensorSelected", idStr);
+            }
+            request.getRequestDispatcher("jsp/dataVisualisation/sensorChart/viewSensorChart.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("jsp/dataVisualisation/sensorChart/viewSensorChart.jsp").forward(request, response);
+        catch (Exception e){}
     }
 }
