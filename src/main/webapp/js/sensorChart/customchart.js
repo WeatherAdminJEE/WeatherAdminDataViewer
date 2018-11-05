@@ -44,6 +44,11 @@ function dateTimeRangeChanged(value){
  * Print new graph for sensor selected and datetime range
  */
 function printGraph(dateArray, valueArray, sensorType){
+    $('#histo-chart').empty();
+    $('#chart-container').html('&nbsp;');
+    $('#chart-container').html('<canvas id="histo-chart"></canvas>');
+
+
     var ctx = document.getElementById('histo-chart').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create

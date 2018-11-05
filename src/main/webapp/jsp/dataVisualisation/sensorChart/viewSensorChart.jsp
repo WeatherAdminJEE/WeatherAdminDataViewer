@@ -96,7 +96,7 @@
                                 <h2>Historique des mesures pour la période</h2>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content">
+                            <div class="x_content" id="chart-container">
                                 <canvas id="histo-chart"></canvas>
                             </div>
                         </div>
