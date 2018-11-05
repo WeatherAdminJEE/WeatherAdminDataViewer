@@ -68,7 +68,8 @@
                                                 ${sensor.status}</td>
 
                                             <td><input type ="button" class="btn btn-info btn-xs"
-                                                       onclick="location.href='./VisualiseAllDataFromOneSensor?idSensor=${sensor.id}';"value="Voir les mesures" />
+                                                       onclick="location.href='./VisualiseAllDataFromOneSensor?idSensor=${sensor.id}';"value="Voir les mesures" /><input type ="button" class="btn btn-info btn-xs"
+                                                                                                                                                                         onclick="location.href='./sensorChart?sensorId=${sensor.id}';"value="Voir le graphique" />
                                         </tr>
                                     </c:forEach>
                                     </tbody>

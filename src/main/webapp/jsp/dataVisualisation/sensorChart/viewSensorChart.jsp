@@ -37,7 +37,14 @@
                                     <!-- TODO: Alimenter le selecteur Select2 avec les capteurs -->
                                     <select class="select2_single form-control" tabindex="-1" id="sensorChoice" onchange="sensorSelectionChanged(this.value);">
                                         <c:forEach items="${sensors}" var="sensor">
-                                            <option value="${sensor.id}">
+                                            <c:choose>
+                                            <c:when test = "${sensorSelected == sensor.id}">
+                                                <option value="${sensor.id}" selected="selected">
+                                            </c:when>
+                                                <c:otherwise>
+                                                    <option value="${sensor.id}">
+                                                </c:otherwise>
+                                            </c:choose>
                                                     ${sensor.name}
                                             </option>
                                         </c:forEach>
