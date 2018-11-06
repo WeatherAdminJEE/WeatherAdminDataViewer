@@ -65,7 +65,6 @@ function dateTimeRangeChanged(start, end){
 
         printGraph(dateArray, valueArray, sensorType);
     });
-
 }
 
 /**
