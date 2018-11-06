@@ -1,5 +1,6 @@
 var startDate = moment().subtract(2, 'hours').format('YYYY-MM-DD HH:mm:ss');
 var endDate = moment().format('YYYY-MM-DD HH:mm:ss');
+var sensorSelected = $("#sensorChoice option:selected").val();
 
 /**
  * When user choose a sensor in the dropdown list
@@ -66,6 +67,7 @@ function dateTimeRangeChanged(start, end) {
 
         printGraph(dateArray, valueArray, sensorType, selectedSensor);
     });
+
 }
 
 /**
@@ -158,13 +160,39 @@ $(function() {
     $("#datetimepickerStart").on("dp.change", function (e) {
         startDate = moment(e.date).format('YYYY-MM-DD HH:mm:ss');
         dateTimeRangeChanged(startDate, endDate);
+        refreshMesure(startDate, endDate);
     });
     $("#datetimepickerEnd").on("dp.change", function (e) {
         endDate = moment(e.date).format('YYYY-MM-DD HH:mm:ss');
         dateTimeRangeChanged(startDate, endDate);
+        refreshMesure(startDate, endDate);
     });
 
     //Pour forcer la premiere creation du graph
-    var sensorSelected = $("#sensorChoice option:selected").val();
+    sensorSelected = $("#sensorChoice option:selected").val();
     sensorSelectionChanged(sensorSelected);
 });
+
+
+
+function refreshMesure(start, end) {
+    console.log("refreshMesure start");
+    var selectedSensor = $('#sensorChoice option:selected').val();
+    console.log("refreshMesure start");
+    console.log(selectedSensor);
+    var dataSet = [];
+    $.getJSON("./getSensorDataById?sensorId=" + selectedSensor + "&beginDate=" + start + "&endDate=" + end, function (records) {
+        $.each(records, function (key, val) {
+            dataSet.push([val["id"], val["value"], moment(val["date"]).format("DD/MM/YYYY HH:mm:ss")]);
+        });
+        $('#datatableMesures').DataTable( {
+            data: dataSet,
+            columns: [
+                { title: "id" },
+                { title: "Valeur" },
+                { title: "Date" }
+            ],
+            "order": [[ 2, "desc" ]]
+        } );
+    });
+}
