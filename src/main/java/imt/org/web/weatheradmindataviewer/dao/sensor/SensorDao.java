@@ -6,6 +6,8 @@ import imt.org.web.weatheradmindataviewer.crud.facade.IEntityFacade;
 import lombok.AllArgsConstructor;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @AllArgsConstructor
 public class SensorDao {
@@ -21,4 +23,6 @@ public class SensorDao {
 
         return (SensorEntity)crudEntityFacade.read(SensorEntity.class, idSensor);
     }
+
+
 }

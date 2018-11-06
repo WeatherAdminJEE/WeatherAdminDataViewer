@@ -46,6 +46,7 @@
                                         <th>Type</th>
                                         <th>Statut</th>
                                         <th>Mesures</th>
+                                        <th>Alertes</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -70,6 +71,8 @@
                                             <td><input type ="button" class="btn btn-info btn-xs"
                                                        onclick="location.href='./VisualiseAllDataFromOneSensor?idSensor=${sensor.id}';"value="Voir les mesures" /><input type ="button" class="btn btn-info btn-xs"
                                                                                                                                                                          onclick="location.href='./sensorChart?sensorId=${sensor.id}';"value="Voir le graphique" />
+                                            <td><input type ="button" class="btn btn-info btn-xs"
+                                                       onclick="location.href='./alertForSensor?idSensor=${sensor.id}';"value="Voir les alertes" /></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
