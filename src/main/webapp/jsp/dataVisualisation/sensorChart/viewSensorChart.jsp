@@ -11,8 +11,8 @@
         <%@ include file="/WEB-INF/jspf/templateHeader.jspf" %>
         <!-- Select2 -->
         <link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-        <!-- bootstrap-daterangepicker -->
-        <link href="vendors/bootstrap-daterangepicker/css/daterangepicker.css" rel="stylesheet">
+        <!-- bootstrap-datetimepicker -->
+        <link href="vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     </head>
 
     <body class="nav-md">
@@ -34,7 +34,6 @@
                             </div>
                             <div class="x_content">
                                 <div class="row">
-                                    <!-- TODO: Alimenter le selecteur Select2 avec les capteurs -->
                                     <select class="select2_single form-control" tabindex="-1" id="sensorChoice" onchange="sensorSelectionChanged(this.value);">
                                         <c:forEach items="${sensors}" var="sensor">
                                             <c:choose>
@@ -63,19 +62,26 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <!--
-                                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                    <span></span> <b class="caret"></b>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepickerStart'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
                                 </div>
-                                -->
-                                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                                    <i class="fa fa-calendar"></i>&nbsp;
-                                    <span></span> <i class="fa fa-caret-down"></i>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepickerEnd'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- datepicker container -->
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel">
@@ -122,9 +128,10 @@
     <%@ include file="/WEB-INF/jspf/includeTemplateScripts.jspf" %>
 
     <script src="vendors/select2/dist/js/select2.full.min.js"></script>
-    <script src="js/sensorChart/moment.min.js"></script>
+    <script src="vendors/moment/min/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="js/sensorChart/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->
+    <script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
     <script src="js/sensorChart/customchart.js"></script>
     </body>
