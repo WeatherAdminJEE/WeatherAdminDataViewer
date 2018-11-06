@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
@@ -39,7 +40,8 @@ public class LoginServlet extends HttpServlet {
 
         //Tous est correct
         //On créé la session
-        request.getSession(true);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("username", username);
 
         //redirection vers la page demandée ou la page d'accueil
         //On ne redirige pas vers logout juste apres un login...
