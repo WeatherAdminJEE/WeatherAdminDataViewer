@@ -41,5 +41,5 @@ public interface IEntityFacade<T> {
      * @param queryString Query
      * @return Objects
      */
-    Collection customFinder(String queryString, Map<String, T> queryParameters);
+    <T> Collection<T> customFinder(String queryString, Map<String, T> queryParameters);
 }

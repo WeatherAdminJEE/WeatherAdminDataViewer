@@ -136,7 +136,7 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
      * @return Objects
      */
     @Override
-    public Collection customFinder(String queryString, Map<String, T> queryParameters) {
+    public <T> Collection<T> customFinder(String queryString, Map<String, T> queryParameters) {
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         List entities = null;
 
