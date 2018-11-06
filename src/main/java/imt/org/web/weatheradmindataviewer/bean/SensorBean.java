@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 public class SensorBean {
@@ -13,7 +15,9 @@ public class SensorBean {
     private float longitude;
     private String type;
     private SensorState status;
-    // peut être les alertes
+    private int idSensorAlertParam;
+    private double alertValue;
+    private Timestamp alertRange;
 
     String toJson(){
         return new Gson().toJson(this);

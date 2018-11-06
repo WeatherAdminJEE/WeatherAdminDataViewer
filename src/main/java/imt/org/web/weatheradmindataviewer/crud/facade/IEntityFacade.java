@@ -26,9 +26,10 @@ public interface IEntityFacade<T> {
 
     /**
      * Update object
-     * @param entity Entity
+     * @param queryString Query
+     * @param queryParameters Query params
      */
-    void update(T entity);
+    void update(String queryString, Map<String, T> queryParameters);
 
     /**
      * Delete object

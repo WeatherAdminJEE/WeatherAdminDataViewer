@@ -38,7 +38,7 @@
                                 <p class="text-muted font-13 m-b-30">
 
                                 </p>
-                                <table id="datatable" class="table table-striped table-bordered">
+                                <table id="datatableSensors" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>Identifiant technique</th>
@@ -68,11 +68,13 @@
                                             </c:if>
                                                 ${sensor.status}</td>
 
-                                            <td><input type ="button" class="btn btn-info btn-xs"
-                                                       onclick="location.href='./VisualiseAllDataFromOneSensor?idSensor=${sensor.id}';"value="Voir les mesures" /><input type ="button" class="btn btn-info btn-xs"
-                                                                                                                                                                         onclick="location.href='./sensorChart?sensorId=${sensor.id}';"value="Voir le graphique" />
-                                            <td><input type ="button" class="btn btn-info btn-xs"
-                                                       onclick="location.href='./alertForSensor?idSensor=${sensor.id}';"value="Voir les alertes" /></td>
+                                            <td><input type ="button" class="btn btn-upload btn-xs"
+                                                       onclick="location.href='./VisualiseAllDataFromOneSensor?idSensor=${sensor.id}';"value="Voir les mesures" />
+                                                <input type ="button" class="btn btn-info btn-xs"
+                                                       onclick="location.href='./sensorChart?sensorId=${sensor.id}';"value="Voir le graphique" />
+                                            <td><input type ="button" class="btn btn-danger btn-xs"
+                                                       onclick="location.href='./alertForSensor?idSensor=${sensor.id}';"value="Voir les alertes" />
+                                                <input type ="button" class="btn btn-primary btn-xs" id="editAlertParam" value="Paramètres" data-toggle="modal" data-target="#editSensorAlertModal${sensor.id}" /></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -83,6 +85,40 @@
                     <!-- /tab container -->
                 </div>
                 <!-- /tab line -->
+
+                <!-- modal -->
+                <c:forEach items="${lstSensors}" var="sensor">
+                <div class="modal fade" id="editSensorAlertModal${sensor.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Paramètre des alertes du capteur : ${sensor.name}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="updateSensorAlertParam">
+                                    <div class="form-group">
+                                        <input id="fieldIdSensor" name="idSensorAlertParam" type="hidden" class="form-control" value="${sensor.idSensorAlertParam}">
+                                        <div class="form-group">
+                                            <label for="fieldAlertValue" class="col-form-label">Seuil d'alerte :</label>
+                                            <input id="fieldAlertValue" name="alertValue" type="text" class="form-control" value="${sensor.alertValue}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fieldAlertRange" class="col-form-label">Durée de dépassement du seuil (secondes) :</label>
+                                            <input id="fieldAlertRange" name="alertRange" type="text" class="form-control" value="${sensor.alertRange}">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                    <button id="btnEditAlert" type="submit" class="btn btn-primary">Enregistrer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
+                <!-- /modal -->
 
             </div>
             <!-- /page content -->
@@ -105,5 +141,12 @@
     <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script>
+        $('#datatableSensors').dataTable( {
+            "fnRowCallback": function (nRow, aaData) {
+                $('td', nRow).eq(3).text("");
+            },
+        } );
+    </script>
     </body>
 </html>

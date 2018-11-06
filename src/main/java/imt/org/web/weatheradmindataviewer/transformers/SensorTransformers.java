@@ -26,6 +26,9 @@ public class SensorTransformers {
         bean.setLongitude(Float.parseFloat(entity.getGpsCoordinates().split(",")[1]));
         bean.setStatus(SensorUtils.computeSensorState2(entity));
         bean.setType(entity.getMeasureType().toString());
+        bean.setIdSensorAlertParam(entity.getSensorAlertParam().getIdSensorAlertParam());
+        bean.setAlertValue(entity.getSensorAlertParam().getAlertValue());
+        bean.setAlertRange(entity.getSensorAlertParam().getAlertRange());
 
         return bean;
     }
