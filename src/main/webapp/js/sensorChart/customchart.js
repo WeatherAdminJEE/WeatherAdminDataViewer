@@ -171,6 +171,7 @@ $(function() {
     //Pour forcer la premiere creation du graph
     sensorSelected = $("#sensorChoice option:selected").val();
     sensorSelectionChanged(sensorSelected);
+    refreshMesure(startDate, endDate);
 });
 
 
