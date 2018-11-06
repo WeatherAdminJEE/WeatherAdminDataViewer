@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import java.util.Collection;
 
 @AllArgsConstructor
-public class SensorAlertDao {
+public class SensorAlertParamDao {
     private IEntityFacade crudEntityFacade;
 
     public Collection findAll(){

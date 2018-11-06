@@ -129,6 +129,7 @@
 
     <script src="vendors/select2/dist/js/select2.full.min.js"></script>
     <script src="vendors/moment/js/moment.min.js"></script>
+    <script src="vendors/chartjs/chartjs-plugin-annotation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <!-- bootstrap-datetimepicker -->
     <script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
