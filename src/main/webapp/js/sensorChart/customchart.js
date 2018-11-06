@@ -87,14 +87,25 @@ function printGraph(dateArray, valueArray, sensorType){
             labels: dateArray,
             datasets: [{
                 label: sensorType,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                fill: true,
+                backgroundColor: 'rgba(32, 162, 219, 0.3)',
+                borderColor: 'rgba(32, 162, 219, 0.8)',
                 data: valueArray
             }]
         },
 
         // Configuration options go here
         options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                        // OR //
+                        beginAtZero: true   // minimum value will be 0.
+                    }
+                }]
+            }
         }
     });
 }
