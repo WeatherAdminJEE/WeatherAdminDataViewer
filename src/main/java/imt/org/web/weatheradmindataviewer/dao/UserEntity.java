@@ -1,4 +1,4 @@
-package dao;
+package imt.org.web.weatheradmindataviewer.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,8 @@
 package imt.org.web.weatheradmindataviewer.servlet;
 
-import dao.UserDao;
+import imt.org.web.weatheradmindataviewer.crud.CRUDEntityFacade;
+import imt.org.web.weatheradmindataviewer.dao.UserDao;
+import imt.org.web.weatheradmindataviewer.dao.sensordata.SensorDataDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,10 +29,10 @@ public class LoginServlet extends HttpServlet {
 
 
         //Les identifiants sont incorrects
-//        boolean authorized = UserManager.IsUserAuthorized(username, password);
-        boolean authorized = UserDao.getInstance().isUserAuthorized(username, password);
+        UserDao userDao = new UserDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
+        boolean authorized = userDao.isUserAuthorized(username, password);
         if(!authorized){
-            request.setAttribute("errorMessage", "Identifiants incorrects");
+            request.setAttribute("errorMessage", "Identifiant ou mot de passe incorrect");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
             return;
         }
