@@ -1,3 +1,6 @@
+var startDate = moment().subtract(2, 'hours').format('YYYY-MM-DD HH:mm:ss');
+var endDate = moment().format('YYYY-MM-DD HH:mm:ss');
+
 /**
  * When user choose a sensor in the dropdown list
  * @param value sensor ID
@@ -21,7 +24,7 @@ function sensorSelectionChanged(value) {
         var datasetArray = [];
         var dateArray = [];
         var valueArray = [];
-        $.getJSON("./getSensorDataById?sensorId=" + value, function (records) {
+        $.getJSON("./getSensorDataById?sensorId=" + value + "&beginDate=" + startDate + "&endDate=" + endDate, function (records) {
             $.each(records, function (key, val) {
                 datasetArray.push({t: moment(val["date"]), y: val["value"]});
                 dateArray.push(moment(val["date"]).format("DD/MM/YYYY HH:mm:ss"));
@@ -36,13 +39,11 @@ function sensorSelectionChanged(value) {
 /**
  * When user change datetime range
  */
-function dateTimeRangeChanged(start, end){
-    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+function dateTimeRangeChanged(start, end) {
     console.log("La sélection de la période a changée :")
-    console.log("start : " + start.format('DD/MM/YYYY HH:mm:ss'));
-    console.log("end : " + end.format('DD/MM/YYYY HH:mm:ss'));
+    console.log("start : " + start);
+    console.log("end : " + end);
 
-    var dateFormat = 'DD/MM/YYYY HH:mm:ss';
     //On update le graph
     //Sensor selected
     var selectedSensor = $('#sensorChoice option:selected').val();
@@ -56,7 +57,7 @@ function dateTimeRangeChanged(start, end){
     var datasetArray = [];
     var dateArray = [];
     var valueArray = [];
-    $.getJSON("./getSensorDataById?sensorId=" + selectedSensor + "&beginDate=" + start.format(dateFormat) + "&endDate=" + end.format(dateFormat), function (records) {
+    $.getJSON("./getSensorDataById?sensorId=" + selectedSensor + "&beginDate=" + start + "&endDate=" + end, function (records) {
         $.each(records, function (key, val) {
             datasetArray.push({t: moment(val["date"]), y: val["value"]});
             dateArray.push(moment(val["date"]).format("DD/MM/YYYY HH:mm:ss"));
@@ -99,8 +100,6 @@ function printGraph(dateArray, valueArray, sensorType){
                 yAxes: [{
                     display: true,
                     ticks: {
-                        // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                        // OR //
                         beginAtZero: true   // minimum value will be 0.
                     }
                 }]
@@ -116,28 +115,27 @@ $(function() {
     /**
      * DateTimePicker initialization
      */
-    var start = moment().subtract(29, 'days');
-    var end = moment();
 
+    $('#datetimepickerStart').datetimepicker({
+        locale: 'fr',
+        date: startDate
+    });
+    $('#datetimepickerEnd').datetimepicker({
+        locale: 'fr',
+        useCurrent: false,
+        date: endDate
+    });
 
-
-    $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    }, dateTimeRangeChanged);
-
-    //dateTimeRangeChanged(start, end);
+    $("#datetimepickerStart").on("dp.change", function (e) {
+        startDate = moment(e.date).format('YYYY-MM-DD HH:mm:ss');
+        dateTimeRangeChanged(startDate, endDate);
+    });
+    $("#datetimepickerEnd").on("dp.change", function (e) {
+        endDate = moment(e.date).format('YYYY-MM-DD HH:mm:ss');
+        dateTimeRangeChanged(startDate, endDate);
+    });
 
     //Pour forcer la premiere creation du graph
     var sensorSelected = $("#sensorChoice option:selected").val();
     sensorSelectionChanged(sensorSelected);
-
 });

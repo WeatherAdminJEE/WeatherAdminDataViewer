@@ -15,6 +15,28 @@
             <%@ include file="/WEB-INF/jspf/templateTopNavigation.jspf" %>
             <!-- page content -->
             <div class="right_col" role="main">
+                <!-- top tiles -->
+                <div class="row tile_count">
+                    <div class="col-sm-3 tile_stats_count">
+                        <span class="count_top">Moyenne des températures :</span>
+                        <div class="count">20,3 °C</div>
+                        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> depuis la semaine dernière</span>
+                    </div>
+                    <div class="col-sm-3 tile_stats_count">
+                        <span class="count_top">Moyenne des pressions atmosphériques :</span>
+                        <div class="count">1009,2 HPa</div>
+                    </div>
+                    <div class="col-sm-3 tile_stats_count">
+                        <span class="count_top">Moyenne de la vitesse du vent :</span>
+                        <div class="count">26,5 km/h</div>
+                        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>10% </i> depuis la semaine dernière</span>
+                    </div>
+                    <div class="col-sm-3 tile_stats_count">
+                        <span class="count_top">Moyenne de la direction du vent :</span>
+                        <div class="count">167,5 °</div>
+                    </div>
+                </div>
+                <!-- /top tiles -->
 
                 <!-- map row -->
                 <div class="row">
@@ -27,7 +49,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <div id="sensorMap" style="height:650px"></div>
+                                <div id="sensorMap" style="height:620px"></div>
                                 <div id="sensorPopup"></div>
                             </div>
                         </div>

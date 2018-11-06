@@ -13,12 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 @WebServlet(name = "GetSensorDataByIdServlet", urlPatterns = "/getSensorDataById")
 public class GetSensorDataByIdServlet extends HttpServlet {
@@ -30,30 +27,10 @@ public class GetSensorDataByIdServlet extends HttpServlet {
 
             String beginDateStr = request.getParameter("beginDate");
             String endDateStr = request.getParameter("endDate");
-            Timestamp beginDate;
-            Timestamp endDate = null;
-            //S'il y a une datetime range indiquée
-            if(
-                beginDateStr != null &&
-                !beginDateStr.isEmpty() &&
-                endDateStr != null &&
-                !endDateStr.isEmpty()
-            ){
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                Date date = dateFormat.parse(beginDateStr);
-                long time = date.getTime();
-                beginDate = new Timestamp(time);
 
-                date = dateFormat.parse(endDateStr);
-                time = date.getTime();
-                endDate = new Timestamp(time);
-            }
-
-            //Sinon on prend par défaut les deux dernieres heures
-            else {
-                LocalDateTime dateTime = LocalDateTime.now().minusHours(2);
-                beginDate = Timestamp.valueOf(dateTime);
-            }
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            Timestamp beginDate = new Timestamp(dateFormat.parse(beginDateStr).getTime());
+            Timestamp endDate = new Timestamp(dateFormat.parse(endDateStr).getTime());
 
             //Récupère la liste de données du sensor selon le date range voulu
             SensorDataDao sensorDataDao = new SensorDataDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
@@ -66,9 +43,8 @@ public class GetSensorDataByIdServlet extends HttpServlet {
         }
         catch (NumberFormatException ex){
             System.out.println("Bad parameter format exception");
-        }
-        catch (ParseException e) {
-            System.out.println("Bad datetime format parameter exception");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 }

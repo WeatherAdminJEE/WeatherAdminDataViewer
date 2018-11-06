@@ -26,14 +26,14 @@
                 <!-- cmd row -->
                 <div class="row">
                     <!-- sensors list container -->
-                    <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-md-6 col-sm-4 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Liste des capteurs</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <div class="row">
+                                <label for="sensorChoice" class="control-label">Capteur :</label>
                                     <select class="select2_single form-control" tabindex="-1" id="sensorChoice" onchange="sensorSelectionChanged(this.value);">
                                         <c:forEach items="${sensors}" var="sensor">
                                             <c:choose>
@@ -48,14 +48,17 @@
                                             </option>
                                         </c:forEach>
                                     </select>
-                                </div>
+                            </div>
+                            <div class="x_content">
+                                <p>Type : <i id="sensorType"></i></p>
+                                <p>Statut : <i id="sensorStatut"></i></p>
                             </div>
                         </div>
                     </div>
                     <!-- /sensors list container -->
 
                     <!-- datepicker container -->
-                    <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-md-6 col-sm-4 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Période des mesures</h2>
@@ -63,36 +66,23 @@
                             </div>
                             <div class="x_content">
                                 <div class="form-group">
+                                    <label for="startDateInput" class="control-label">Date de début :</label>
                                     <div class='input-group date' id='datetimepickerStart'>
-                                        <input type='text' class="form-control" />
+                                        <input type='text' class="form-control" id="startDateInput"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="endDateInput" class="control-label">Date de fin :</label>
                                     <div class='input-group date' id='datetimepickerEnd'>
-                                        <input type='text' class="form-control" />
+                                        <input type='text' class="form-control" id="endDateInput"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- datepicker container -->
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Détails du capteur</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <p>Nom : <i id="sensorName"></i></p>
-                                <p>Type : <i id="sensorType"></i></p>
-                                <p>Statut : <i id="sensorStatut"></i></p>
                             </div>
                         </div>
                     </div>
@@ -129,9 +119,10 @@
 
     <script src="vendors/select2/dist/js/select2.full.min.js"></script>
     <script src="vendors/moment/js/moment.min.js"></script>
+    <script src="vendors/moment/locale/fr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <!-- bootstrap-datetimepicker -->
-    <script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
     <script src="js/sensorChart/customchart.js"></script>
     </body>
