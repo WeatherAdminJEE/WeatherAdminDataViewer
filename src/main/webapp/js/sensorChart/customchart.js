@@ -28,7 +28,7 @@ function sensorSelectionChanged(value) {
                 valueArray.push(val["value"]);
             });
 
-            printGraph(dateArray, valueArray, sensorType);
+            printGraph(dateArray, valueArray, sensorType, value);
         });
     });
 }
@@ -63,89 +63,110 @@ function dateTimeRangeChanged(start, end){
             valueArray.push(val["value"]);
         });
 
-        printGraph(dateArray, valueArray, sensorType);
+        printGraph(dateArray, valueArray, sensorType, selectedSensor);
     });
 }
 
 /**
  * Print new graph for sensor selected and datetime range
  */
-function printGraph(dateArray, valueArray, sensorType){
+function printGraph(dateArray, valueArray, sensorType, sensorId){
     $('#histo-chart').empty();
     $('#chart-container').html('&nbsp;');
     $('#chart-container').html('<canvas id="histo-chart"></canvas>');
 
+    console.log("helloworld");
+    $.getJSON("./getSensorAlertParamBySensorId?sensorId=" + sensorId, function (alertParam) {
 
-    var ctx = document.getElementById('histo-chart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
+        console.log("alertparam : " + JSON.stringify(alertParam));
+        var alertValue = alertParam["value"];
+        var ctx = document.getElementById('histo-chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
 
-        // The data for our dataset
-        data: {
-            labels: dateArray,
-            datasets: [{
-                label: sensorType,
-                fill: true,
-                backgroundColor: 'rgba(32, 162, 219, 0.3)',
-                borderColor: 'rgba(32, 162, 219, 0.8)',
-                data: valueArray
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            scales: {
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                        // OR //
-                        beginAtZero: true   // minimum value will be 0.
-                    }
+            // The data for our dataset
+            data: {
+                labels: dateArray,
+                datasets: [{
+                    label: sensorType,
+                    fill: true,
+                    backgroundColor: 'rgba(32, 162, 219, 0.3)',
+                    borderColor: 'rgba(32, 162, 219, 0.8)',
+                    data: valueArray
                 }]
             },
-            annotation: {
-                // Defines when the annotations are drawn.
-                // This allows positioning of the annotation relative to the other
-                // elements of the graph.
-                //
-                // Should be one of: afterDraw, afterDatasetsDraw, beforeDatasetsDraw
-                // See http://www.chartjs.org/docs/#advanced-usage-creating-plugins
-                drawTime: 'afterDatasetsDraw', // (default)
 
-                // Mouse events to enable on each annotation.
-                // Should be an array of one or more browser-supported mouse events
-                // See https://developer.mozilla.org/en-US/docs/Web/Events
-                events: ['click'],
+            // Configuration options go here
+            options: {
+                scales: {
+                    yAxes: [{
+                        // display: true,
+                        ticks: {
+                            // suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                            // OR //
+                            beginAtZero: true   // minimum value will be 0.
+                        }
+                    }]
+                },
+                annotation: {
+                    annotations: [{
+                        type: 'line',
+                        mode: 'horizontal',
+                        scaleID: 'y-axis-0',
+                        value: alertValue,
+                        borderColor: 'red',
+                        borderWidth: 3,
+                        label: {
+                            // Background color of label, default below
+                            backgroundColor: 'rgba(0,0,0,0.8)',
 
-                // Double-click speed in ms used to distinguish single-clicks from
-                // double-clicks whenever you need to capture both. When listening for
-                // both click and dblclick, click events will be delayed by this
-                // amount.
-                dblClickSpeed: 350, // ms (default)
+                            // Font family of text, inherits from global
+                            fontFamily: "sans-serif",
 
-                // Array of annotation configuration objects
-                // See below for detailed descriptions of the annotation options
-                annotations: [{
-                    drawTime: 'afterDraw', // overrides annotation.drawTime if set
-                    id: 'a-line-1', // optional
-                    type: 'line',
-                    mode: 'horizontal',
-                    scaleID: 'y-axis-0',
-                    value: '300',
-                    borderColor: 'red',
-                    borderWidth: 2,
+                            // Font size of text, inherits from global
+                            fontSize: 12,
 
-                    // Fires when the user clicks this annotation on the chart
-                    // (be sure to enable the event in the events array below).
-                    onClick: function(e) {
-                        // `this` is bound to the annotation element
-                    }
-                }]
+                            // Font style of text, default below
+                            fontStyle: "bold",
+
+                            // Font color of text, default below
+                            fontColor: "#fff",
+
+                            // Padding of label to add left/right, default below
+                            xPadding: 6,
+
+                            // Padding of label to add top/bottom, default below
+                            yPadding: 6,
+
+                            // Radius of label rectangle, default below
+                            cornerRadius: 6,
+
+                            // Anchor position of label on line, can be one of: top, bottom, left, right, center. Default below.
+                            position: "center",
+
+                            // Adjustment along x-axis (left-right) of label relative to above number (can be negative)
+                            // For horizontal lines positioned left or right, negative values move
+                            // the label toward the edge, and positive values toward the center.
+                            xAdjust: 0,
+
+                            // Adjustment along y-axis (top-bottom) of label relative to above number (can be negative)
+                            // For vertical lines positioned top or bottom, negative values move
+                            // the label toward the edge, and positive values toward the center.
+                            yAdjust: 0,
+
+                            // Whether the label is enabled and should be displayed
+                            enabled: true,
+
+                            // Text to display in label - default is null
+                            content: "Seuil d'alerte"
+                        }
+                    }]
+                }
             }
-        }
+        });
     });
+
 }
 
 

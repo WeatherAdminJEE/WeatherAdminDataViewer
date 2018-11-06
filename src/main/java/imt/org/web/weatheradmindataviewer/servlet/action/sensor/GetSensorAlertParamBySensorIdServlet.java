@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet(name = "GetSensorAlertParamBySensorIdServlet", urlPatterns = { "/getSensorAlertParamBySensorId"})
 public class GetSensorAlertParamBySensorIdServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int sensorId;
         try {
             String idStr = request.getParameter("sensorId");
