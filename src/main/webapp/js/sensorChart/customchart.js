@@ -31,7 +31,7 @@ function sensorSelectionChanged(value) {
                 valueArray.push(val["value"]);
             });
 
-            printGraph(dateArray, valueArray, sensorType);
+            printGraph(dateArray, valueArray, sensorType, value);
         });
     });
 }
@@ -64,53 +64,80 @@ function dateTimeRangeChanged(start, end) {
             valueArray.push(val["value"]);
         });
 
-        printGraph(dateArray, valueArray, sensorType);
+        printGraph(dateArray, valueArray, sensorType, selectedSensor);
     });
 }
 
 /**
  * Print new graph for sensor selected and datetime range
  */
-function printGraph(dateArray, valueArray, sensorType){
+function printGraph(dateArray, valueArray, sensorType, sensorId){
     $('#histo-chart').empty();
     $('#chart-container').html('&nbsp;');
     $('#chart-container').html('<canvas id="histo-chart"></canvas>');
 
 
-    var ctx = document.getElementById('histo-chart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
+    $.getJSON("./getSensorAlertParamBySensorId?sensorId=" + sensorId, function (alertParam) {
 
-        // The data for our dataset
-        data: {
-            labels: dateArray,
-            datasets: [{
-                label: sensorType,
-                fill: true,
-                backgroundColor: 'rgba(32, 162, 219, 0.3)',
-                borderColor: 'rgba(32, 162, 219, 0.8)',
-                data: valueArray
-            }]
-        },
+        console.log("alertparam : " + JSON.stringify(alertParam));
+        var alertValue = alertParam["value"];
+        var ctx = document.getElementById('histo-chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
 
-        // Configuration options go here
-        options: {
-            scales: {
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        beginAtZero: true   // minimum value will be 0.
-                    }
+            // The data for our dataset
+            data: {
+                labels: dateArray,
+                datasets: [{
+                    label: sensorType,
+                    fill: true,
+                    backgroundColor: 'rgba(32, 162, 219, 0.3)',
+                    borderColor: 'rgba(32, 162, 219, 0.8)',
+                    data: valueArray
                 }]
+            },
+
+            // Configuration options go here
+            options: {
+                scales: {
+                    yAxes: [{
+                        // display: true,
+                        ticks: {
+                            beginAtZero: true   // minimum value will be 0.
+                        }
+                    }]
+                },
+                annotation: {
+                    annotations: [{
+                        type: 'line',
+                        mode: 'horizontal',
+                        scaleID: 'y-axis-0',
+                        value: alertValue,
+                        borderColor: 'red',
+                        borderWidth: 3,
+                        label: {
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            fontFamily: "sans-serif",
+                            fontSize: 12,
+                            fontStyle: "bold",
+                            fontColor: "#fff",
+                            xPadding: 6,
+                            yPadding: 6,
+                            cornerRadius: 6,
+                            position: "center",
+                            xAdjust: 0,
+                            yAdjust: 0,
+                            enabled: true,
+                            content: "Seuil d'alerte"
+                        }
+                    }]
+                }
             }
-        }
+        });
     });
+
 }
-
-
-
-
 $(function() {
     /**
      * DateTimePicker initialization
