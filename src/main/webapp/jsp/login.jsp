@@ -24,6 +24,9 @@
                                 <h5 align="left">Mot de passe :</h5>
                                 <input type="password" class="form-control" name="password" required="" />
                             </div>
+                            <c:if test="${not empty errorMessage}">
+                                <p style="color: red; font-weight:  bold;">${errorMessage}</p>
+                            </c:if>
                             <input type="hidden" name="requestedURI" value="${requestedURI}">
                             <div>
                                 <input class="btn btn-default submit" type="submit" value="Connexion">
@@ -37,7 +40,4 @@
         </div>
     <%@ include file="/WEB-INF/jspf/includeTemplateScripts.jspf" %>
     </body>
-        <c:if test="${not empty errorMessage}">
-            <p>${errorMessage}</p>
-        </c:if>
 </html>

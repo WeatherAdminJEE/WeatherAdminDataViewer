@@ -104,6 +104,8 @@ function printGraph(dateArray, valueArray, sensorType, sensorId){
                     yAxes: [{
                         // display: true,
                         ticks: {
+                            // min: 1000,
+                            // max : 1050
                             beginAtZero: true   // minimum value will be 0.
                         }
                     }]

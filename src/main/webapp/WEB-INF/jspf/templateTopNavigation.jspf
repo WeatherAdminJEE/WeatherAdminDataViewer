@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <!-- top navigation -->
@@ -12,7 +13,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
                         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <img src="" alt="">Disruptive user
+                            <img src="" alt=""> ${sessionScope.username}
                             <span class=" fa fa-angle-down"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-usermenu pull-right">

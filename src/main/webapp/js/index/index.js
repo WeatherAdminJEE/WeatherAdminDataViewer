@@ -61,7 +61,8 @@ function initSensorPopups() {
             $(popupElem).attr('data-placement', 'top');
             $(popupElem).attr('data-content', "<div style=\"height:150px\">" +
                 "<div class=\"x_title\">" +
-                    "<h2>Nom du capteur : " +  feature.get('nameSensor') +"</h2>" +
+                    "<h2>Nom du capteur :</h2>" +
+                    "<h4>" + feature.get('nameSensor') + "</h4>" +
                     "<div class=\"clearfix\"></div>" +
                     "</div>" +
                         "<div class=\"x_content\">" +
