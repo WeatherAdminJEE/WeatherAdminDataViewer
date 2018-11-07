@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="fieldAlertRange" class="col-form-label">Durée de dépassement du seuil (secondes) :</label>
-                                            <input id="fieldAlertRange" name="alertRange" type="text" class="form-control" value="${sensor.alertRange}">
+                                            <input id="fieldAlertRange" name="alertRange" type="text" class="form-control" value="${sensor.alertRangeMillis}">
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

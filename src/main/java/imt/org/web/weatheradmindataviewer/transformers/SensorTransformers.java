@@ -29,6 +29,7 @@ public class SensorTransformers {
         bean.setIdSensorAlertParam(entity.getSensorAlertParam().getIdSensorAlertParam());
         bean.setAlertValue(entity.getSensorAlertParam().getAlertValue());
         bean.setAlertRange(entity.getSensorAlertParam().getAlertRange());
+        bean.setAlertRangeMillis(entity.getSensorAlertParam().getAlertRange().getTime() / 1000);
 
         return bean;
     }

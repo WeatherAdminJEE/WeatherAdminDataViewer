@@ -18,6 +18,7 @@ public class SensorBean {
     private int idSensorAlertParam;
     private double alertValue;
     private Timestamp alertRange;
+    private long alertRangeMillis;
 
     String toJson(){
         return new Gson().toJson(this);
