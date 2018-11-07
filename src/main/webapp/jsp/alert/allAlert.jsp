@@ -7,7 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="fr">
 <head>
-    <title>Toutes les alerts</title>
+    <title>Toutes les alertes</title>
     <%@ include file="/WEB-INF/jspf/templateHeader.jspf" %>
     <!-- Datatables -->
     <link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">

@@ -6,7 +6,7 @@
 <html>
     <head>
         <title>Connexion</title>
-        <%@ include file="/WEB-INF/jspf/includeTemplateCSS.jspf" %>
+        <%@ include file="/WEB-INF/jspf/templateHeader.jspf" %>
     </head>
 
     <body class="login">
