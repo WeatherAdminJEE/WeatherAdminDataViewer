@@ -21,15 +21,12 @@ function sensorSelectionChanged(value) {
         console.log("value : " + value);
         $.getJSON("./getAlertBySensorId?sensorId=" + value , function (alerts) {
             console.log(JSON.stringify(alerts));
-            // $.each(records, function (key, val) {
-            //     datasetArray.push({t: moment(val["date"]), y: val["value"]});
-            //     dateArray.push(moment(val["date"]).format("DD/MM/YYYY HH:mm:ss"));
-            //     valueArray.push(val["value"]);
-            // });
             var dataSet = [];
             $.each(alerts, function (key,val) {
                 dataSet.push([val["sensorName"], val["param"]["value"], val["startDate"], val["endDate"]]);
             });
+
+            printTable(dataSet);
         });
     });
 }
