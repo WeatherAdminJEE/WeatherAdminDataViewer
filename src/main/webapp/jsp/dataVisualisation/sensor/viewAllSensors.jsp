@@ -73,7 +73,7 @@
                                                 <input type ="button" class="btn btn-info btn-xs"
                                                        onclick="location.href='./sensorChart?sensorId=${sensor.id}';"value="Voir le graphique" />
                                             <td><input type ="button" class="btn btn-danger btn-xs"
-                                                       onclick="location.href='./alertForSensor?idSensor=${sensor.id}';"value="Voir les alertes" />
+                                                       onclick="location.href='./sensorAlerts?sensorId=${sensor.id}';"value="Voir les alertes" />
                                                 <input type ="button" class="btn btn-primary btn-xs" id="editAlertParam" value="Paramètres" data-toggle="modal" data-target="#editSensorAlertModal${sensor.id}" /></td>
                                         </tr>
                                     </c:forEach>

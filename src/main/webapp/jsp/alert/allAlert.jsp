@@ -25,6 +25,44 @@
         <!-- page content -->
         <div class="right_col" role="main">
 
+            <!-- cmd row -->
+            <div class="row">
+                <!-- sensors list container -->
+                <div class="col-md-6 col-sm-4 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Liste des capteurs</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <label for="sensorChoice" class="control-label">Capteur :</label>
+                            <select class="select2_single form-control" tabindex="-1" id="sensorChoice" onchange="sensorSelectionChanged(this.value);">
+                                <c:forEach items="${sensors}" var="sensor">
+                                    <c:choose>
+                                        <c:when test = "${sensorSelected == sensor.id}">
+                                            <option value="${sensor.id}" selected="selected">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${sensor.id}">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    ${sensor.name}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="x_content">
+                            <p>Type : <i id="sensorType"></i></p>
+                            <p>Statut : <i id="sensorStatut"></i></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /sensors list container -->
+
+
+            </div>
+            <!-- /cmd row -->
+
             <!-- tab line -->
             <div class="row">
                 <!-- tab container -->
@@ -36,30 +74,8 @@
                         </div>
                         <div class="x_content">
                             <p class="text-muted font-13 m-b-30">
-
                             </p>
-                            <table id="datatableAlertes" class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <%--<th>Identifiant technique</th>--%>
-                                    <th>Nom du capteur</th>
-                                    <th>ValeurSeuil</th>
-                                    <th>Debut</th>
-                                    <th>Fin</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${lstAlert}" var="alert">
-                                    <tr>
-                                        <%--<td>${alert.id}</td>--%>
-                                        <td>${alert.sensor.name}</td>
-                                        <td>${alert.param.value}</td>
-                                        <td>${alert.startDate}</td>
-                                        <td>${alert.endDate}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                            <table id="datatableAlertes" class="table table-striped table-bordered"></table>
                         </div>
                     </div>
                 </div>
@@ -88,12 +104,11 @@
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+
+<script src="js/alert/alert.js"></script>
+
 <script>
-    $(document).ready(function() {
-        $('#datatableAlertes').DataTable( {
-            "order": [[ 2, "desc" ]]
-        } );
-    } );
+
 </script>
 </body>
 </html>

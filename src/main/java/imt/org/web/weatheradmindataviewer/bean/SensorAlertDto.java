@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class SensorAlertDto {
     private int id;
-    private SensorBean sensor;
+    private String sensorName;
     private SensorAlertParamDto param;
     private Timestamp startDate;
     private Timestamp endDate;

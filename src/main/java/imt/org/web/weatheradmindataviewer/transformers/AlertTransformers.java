@@ -13,13 +13,10 @@ public class AlertTransformers {
     public static SensorAlertDto entityToDto(SensorAlertEntity entity){
         SensorAlertDto dto = new SensorAlertDto();
         dto.setId(entity.getIdSensorAlert());
-        dto.setSensor(SensorTransformers.entityToBean(entity.getSensor()));
+        dto.setSensorName(entity.getSensor().getNameSensor());
         dto.setParam(SensorAlertParamTransormer.entityToDto(entity.getSensorAlertParam()));
         dto.setStartDate(entity.getStartDate());
         dto.setEndDate(entity.getEndDate());
-
-        System.out.println(entity.getSensor().getNameSensor());
-
         return dto;
     }
 
