@@ -20,29 +20,7 @@
         <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
         <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
         <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-        <style>
-            .loader {
-                border: 16px solid #f3f3f3;
-                border-radius: 50%;
-                border-top: 16px solid #20A2DB;
-                border-bottom: 16px solid #20A2DB;
-                width: 120px;
-                height: 120px;
-                -webkit-animation: spin 2s linear infinite;
-                animation: spin 2s linear infinite;
-            }
-
-            @-webkit-keyframes spin {
-                0% { -webkit-transform: rotate(0deg); }
-                100% { -webkit-transform: rotate(360deg); }
-            }
-
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
-
+        <link href="css/loader.css" rel="stylesheet">
     </head>
 
     <body class="nav-md">

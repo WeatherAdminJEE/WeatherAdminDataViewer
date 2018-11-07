@@ -15,6 +15,8 @@
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="css/loader.css" rel="stylesheet">
+
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -59,9 +61,18 @@
                 </div>
                 <!-- /sensors list container -->
 
+                <%--<div class="col-md-6 col-sm-4 col-xs-12" id="custom-loader">--%>
+                    <%--<div class="loader" style="margin: auto;"></div>--%>
+                <%--</div>--%>
+
 
             </div>
             <!-- /cmd row -->
+
+            <div class="row" id="custom-loader">
+                <div class="loader" style="margin: auto;"></div>
+            </div>
+
 
             <!-- tab line -->
             <div class="row">

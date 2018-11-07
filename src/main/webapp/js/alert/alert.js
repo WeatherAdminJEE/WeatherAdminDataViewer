@@ -1,8 +1,17 @@
+function showLoader(){
+    $('#custom-loader').show();
+}
+
+function hideLoader(){
+    $('#custom-loader').hide();
+}
+
 /**
  * When user choose a sensor in the dropdown list
  * @param value sensor ID
  */
 function sensorSelectionChanged(value) {
+    showLoader();
     /*
     Affiche les détails du capteur sélectionné
      */
@@ -39,6 +48,7 @@ function sensorSelectionChanged(value) {
 function printTable(dataSet){
     //Reset le tableau avec le nouveau dataset
     $('#datatableAlertes').DataTable().clear().rows.add(dataSet).draw();
+    hideLoader();
 }
 
 
