@@ -2,14 +2,24 @@ var startDate = moment().subtract(2, 'hours').format('YYYY-MM-DD HH:mm:ss');
 var endDate = moment().format('YYYY-MM-DD HH:mm:ss');
 var sensorSelected = $("#sensorChoice option:selected").val();
 
+function showLoader(){
+    $('#custom-loader').show();
+}
+
+function hideLoader(){
+    $('#custom-loader').hide();
+}
+
 /**
  * When user choose a sensor in the dropdown list
  * @param value sensor ID
  */
 function sensorSelectionChanged(value) {
+    showLoader();
     /*
     Affiche les détails du capteur sélectionné
      */
+
     $.getJSON("./getSensorById?sensorId=" + value, function (sensor) {
         var sensorName = sensor["name"];
         var sensorType = sensor["type"];
@@ -43,6 +53,7 @@ function sensorSelectionChanged(value) {
  * When user change datetime range
  */
 function dateTimeRangeChanged(start, end) {
+    showLoader();
     console.log("La sélection de la période a changée :")
     console.log("start : " + start);
     console.log("end : " + end);
@@ -146,7 +157,7 @@ function printGraphAndTable(dateArray, valueArray, sensorType, sensorId, tableDa
     });
 
     $('#datatableMesures').DataTable().clear().rows.add(tableData).draw();
-
+    hideLoader();
 }
 
 $(function() {
@@ -176,7 +187,7 @@ $(function() {
     });
 
     //Premiere initialisation du tableau vide
-    $('#datatableMesures').DataTable( {
+    $('#datatableMesures').DataTable({
         // data: dataSet,
         columns: [
             { title: "id" },
