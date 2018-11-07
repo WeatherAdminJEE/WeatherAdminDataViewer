@@ -30,8 +30,6 @@ function sensorSelectionChanged(value) {
             $.each(alerts, function (key,val) {
                 dataSet.push([val["sensorName"], val["param"]["value"], val["startDate"], val["endDate"]]);
             });
-
-            printTable(dataSet);
         });
     });
 }
@@ -42,13 +40,14 @@ function sensorSelectionChanged(value) {
  * Print new graph for sensor selected and datetime range
  */
 function printTable(dataSet){
-    console.log("dataset : " + JSON.stringify(dataSet));
+    //Reset le tableau avec le nouveau dataset
     $('#datatableAlertes').DataTable().clear().rows.add(dataSet).draw();
 }
 
 
 $(function() {
 
+    //Premiere initialisation du tableau
     $('#datatableAlertes').DataTable( {
         // data: dataSet,
         columns: [
