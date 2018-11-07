@@ -40,8 +40,8 @@
                                 <h2>Liste des capteurs</h2>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content">
-                                <label for="sensorChoice    " class="control-label">Capteur :</label>
+                            <div class="x_content" style="height:60px">
+                                <label for="sensorChoice" class="control-label">Capteur :</label>
                                     <select class="select2_single form-control" tabindex="-1" id="sensorChoice" onchange="sensorSelectionChanged(this.value);">
                                         <c:forEach items="${sensors}" var="sensor">
                                             <c:choose>
@@ -57,7 +57,7 @@
                                         </c:forEach>
                                     </select>
                             </div>
-                            <div class="x_content">
+                            <div class="x_content" style="height:75px">
                                 <p>Type : <i id="sensorType"></i></p>
                                 <p>Statut : <i id="sensorStatut"></i></p>
                             </div>
@@ -72,7 +72,7 @@
                                 <h2>Période des mesures</h2>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content">
+                            <div class="x_content" style="height:140px">
                                 <div class="form-group">
                                     <label for="startDateInput" class="control-label">Date de début :</label>
                                     <div class='input-group date' id='datetimepickerStart'>
@@ -121,7 +121,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Liste des mesures pour le capteur : ${sensor.name}</h2>
+                                <h2>Liste des mesures pour la période</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
