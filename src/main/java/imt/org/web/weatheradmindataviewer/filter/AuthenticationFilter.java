@@ -45,6 +45,10 @@ public class AuthenticationFilter implements Filter {
             chain.doFilter(request, response);
         else if (requestedURI.indexOf("/images") > 0)
             chain.doFilter(request, response);
+        else if (requestedURI.indexOf("/img") > 0)
+            chain.doFilter(request, response);
+        else if (requestedURI.indexOf("/vendors") > 0)
+            chain.doFilter(request, response);
         else {
 
             //Si l'utilisateur n'est pas connecté :

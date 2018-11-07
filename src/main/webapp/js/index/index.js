@@ -61,16 +61,16 @@ function initSensorPopups() {
             $(popupElem).attr('data-placement', 'top');
             $(popupElem).attr('data-content', "<div style=\"height:150px\">" +
                 "<div class=\"x_title\">" +
-                    "<h2>Nom du capteur :</h2>" +
+                    "<h4><b>Nom du capteur :</b></h4>" +
                     "<h4>" + feature.get('nameSensor') + "</h4>" +
                     "<div class=\"clearfix\"></div>" +
                     "</div>" +
                         "<div class=\"x_content\">" +
-                            "<h4>ID Capteur : " + feature.get('idSensor') + "</h4>" +
-                            "<h4>Type du capteur : " + feature.get('typeSensor') + "</h4>" +
-                            "<h4>Statut : " + feature.get('statusSensor') + "</h4>" +
-                            "<input type =\"button\" class=\"btn btn-info\" onclick=\"location.href='./VisualiseAllDataFromOneSensor?idSensor=" +
-                            feature.get('idSensor') + "';\" value=\"Voir les mesures\" />" +
+                            "<h4><b>ID Capteur : </b>" + feature.get('idSensor') + "</h4>" +
+                            "<h4><b>Type du capteur </b>: " + feature.get('typeSensor') + "</h4>" +
+                            "<h4><b>Statut : </b>" + feature.get('statusSensor') + "</h4>" +
+                            "<input type =\"button\" class=\"btn btn-info\" onclick=\"location.href='./sensorChart?sensorId=" +
+                            feature.get('idSensor') + "';\" value=\"Voir le graphique\" />" +
                         "</div>" +
                     "</div>" +
                 "</div>");
