@@ -25,14 +25,16 @@ function sensorSelectionChanged(value) {
         var datasetArray = [];
         var dateArray = [];
         var valueArray = [];
+        var tableData = [];
         $.getJSON("./getSensorDataById?sensorId=" + value + "&beginDate=" + startDate + "&endDate=" + endDate, function (records) {
             $.each(records, function (key, val) {
                 datasetArray.push({t: moment(val["date"]), y: val["value"]});
                 dateArray.push(moment(val["date"]).format("DD/MM/YYYY HH:mm:ss"));
                 valueArray.push(val["value"]);
+                tableData.push([val["id"], val["value"], moment(val["date"]).format("DD/MM/YYYY HH:mm:ss")]);
             });
 
-            printGraph(dateArray, valueArray, sensorType, value);
+            printGraphAndTable(dateArray, valueArray, sensorType, value, tableData);
         });
     });
 }
@@ -57,15 +59,17 @@ function dateTimeRangeChanged(start, end) {
      */
     var datasetArray = [];
     var dateArray = [];
+    var tableData = [];
     var valueArray = [];
     $.getJSON("./getSensorDataById?sensorId=" + selectedSensor + "&beginDate=" + start + "&endDate=" + end, function (records) {
         $.each(records, function (key, val) {
             datasetArray.push({t: moment(val["date"]), y: val["value"]});
             dateArray.push(moment(val["date"]).format("DD/MM/YYYY HH:mm:ss"));
             valueArray.push(val["value"]);
+            tableData.push([val["id"], val["value"], moment(val["date"]).format("DD/MM/YYYY HH:mm:ss")]);
         });
 
-        printGraph(dateArray, valueArray, sensorType, selectedSensor);
+        printGraphAndTable(dateArray, valueArray, sensorType, selectedSensor, tableData);
     });
 
 }
@@ -73,7 +77,7 @@ function dateTimeRangeChanged(start, end) {
 /**
  * Print new graph for sensor selected and datetime range
  */
-function printGraph(dateArray, valueArray, sensorType, sensorId){
+function printGraphAndTable(dateArray, valueArray, sensorType, sensorId, tableData){
     $('#histo-chart').empty();
     $('#chart-container').html('&nbsp;');
     $('#chart-container').html('<canvas id="histo-chart"></canvas>');
@@ -141,7 +145,10 @@ function printGraph(dateArray, valueArray, sensorType, sensorId){
         });
     });
 
+    $('#datatableMesures').DataTable().clear().rows.add(tableData).draw();
+
 }
+
 $(function() {
     /**
      * DateTimePicker initialization
@@ -160,18 +167,29 @@ $(function() {
     $("#datetimepickerStart").on("dp.change", function (e) {
         startDate = moment(e.date).format('YYYY-MM-DD HH:mm:ss');
         dateTimeRangeChanged(startDate, endDate);
-        refreshMesure(startDate, endDate);
+        // refreshMesure(startDate, endDate);
     });
     $("#datetimepickerEnd").on("dp.change", function (e) {
         endDate = moment(e.date).format('YYYY-MM-DD HH:mm:ss');
         dateTimeRangeChanged(startDate, endDate);
-        refreshMesure(startDate, endDate);
+        // refreshMesure(startDate, endDate);
     });
+
+    //Premiere initialisation du tableau vide
+    $('#datatableMesures').DataTable( {
+        // data: dataSet,
+        columns: [
+            { title: "id" },
+            { title: "Valeur" },
+            { title: "Date" }
+        ],
+        "order": [[ 2, "desc" ]]
+    } );
 
     //Pour forcer la premiere creation du graph
     sensorSelected = $("#sensorChoice option:selected").val();
     sensorSelectionChanged(sensorSelected);
-    refreshMesure(startDate, endDate);
+    // refreshMesure(startDate, endDate);
 });
 
 
