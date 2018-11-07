@@ -100,7 +100,7 @@
                             <div class="modal-body">
                                 <form method="post" action="updateSensorAlertParam">
                                     <div class="form-group">
-                                        <input id="fieldIdSensor" name="idSensorAlertParam" type="hidden" class="form-control" value="${sensor.idSensorAlertParam}">
+                                        <input id="fieldIdSensor" name="idSensor" type="hidden" class="form-control" value="${sensor.id}">
                                         <div class="form-group">
                                             <label for="fieldAlertValue" class="col-form-label">Seuil d'alerte :</label>
                                             <input id="fieldAlertValue" name="alertValue" type="text" class="form-control" value="${sensor.alertValue}">
