@@ -56,15 +56,15 @@
                                             <td>${sensor.name}</td>
                                             <td>${sensor.type}</td>
                                             <c:if test="${sensor.status=='ALERTE'}">
-                                                <td style="background-color: salmon">
+                                                <td style="background-color: salmon; color: aliceblue;">
                                             </c:if>
 
                                             <c:if test="${sensor.status=='NORMAL'}">
-                                                <td style="background-color: seagreen">
+                                                <td style="background-color: forestgreen; color: aliceblue;">
                                             </c:if>
 
                                             <c:if test="${sensor.status=='DECONNECTE'}">
-                                                <td style="background-color: mediumvioletred">
+                                                <td style="background-color: mediumvioletred; color: aliceblue;">
                                             </c:if>
                                                 ${sensor.status}</td>
 
@@ -144,7 +144,6 @@
     <script>
         $('#datatableSensors').dataTable( {
             "fnRowCallback": function (nRow, aaData) {
-                $('td', nRow).eq(3).text("");
             },
         } );
     </script>
