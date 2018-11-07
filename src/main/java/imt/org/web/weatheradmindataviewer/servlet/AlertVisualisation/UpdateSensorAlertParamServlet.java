@@ -17,7 +17,7 @@ public class UpdateSensorAlertParamServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SensorAlertParamDao sensorAlertParamDao = new SensorAlertParamDao((CRUDEntityFacade)getServletContext().getAttribute("CRUDEntityFacade"));
-        int idSensor = Integer.parseInt(request.getParameter("idSensorAlertParam"));
+        int idSensor = Integer.parseInt(request.getParameter("idSensor"));
         double alertValue = Double.valueOf(request.getParameter("alertValue"));
         Timestamp alertRange = Timestamp.valueOf(request.getParameter("alertRange"));
         sensorAlertParamDao.updateSensorAlertParam(idSensor, alertValue, alertRange);

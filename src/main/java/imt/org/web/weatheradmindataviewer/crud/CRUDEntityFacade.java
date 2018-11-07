@@ -3,7 +3,6 @@ package imt.org.web.weatheradmindataviewer.crud;
 import imt.org.web.weatheradmindataviewer.crud.facade.IEntityFacade;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -74,26 +73,27 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
 
     /**
      * Update object
-     * @param queryString Query
-     * @param queryParameters Query params
+     * @param entity Entity
      */
     @Override
-    @Transactional
-    public void update(String queryString, Map<String, T> queryParameters) {
+    public void update(final T entity) {
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
 
         try {
+            transaction = manager.getTransaction();
+            transaction.begin();
             System.out.println("CRUD facade - update() - Begin transaction");
-            Query query = manager.createNativeQuery(queryString);
-            if(queryParameters != null && !queryParameters.isEmpty()) {
-                for(Map.Entry<String, T> entry : queryParameters.entrySet()) {
-                    query.setParameter(entry.getKey(), entry.getValue());
-                }
-            }
-            query.executeUpdate();
+
+            manager.merge(entity);
+            transaction.commit();
             System.out.println("CRUD facade - update() - Transaction success");
         } catch (PersistenceException hibernateEx) {
             System.out.println("CRUD facade - update() - Update error - " + hibernateEx.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+                System.out.println("CRUD facade - update() - Action rollback !\n" + hibernateEx.getMessage());
+            }
         } finally {
             manager.close();
             System.out.println("CRUD facade - update() - EntityManager closed");
@@ -127,7 +127,6 @@ public class CRUDEntityFacade<T> implements IEntityFacade<T> {
             manager.close();
             System.out.println("CRUD facade - delete() - EntityManager closed");
         }
-
     }
 
     /**
